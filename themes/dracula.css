@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+* {font-family: 'Fira Code', monospace;}
+
+.blue {color: #6272a4}
+.cyan {color: #8be9fd}
+.green {color: #50fa7b}
+.orange {color: #ffb86c}
+.pink {color: #ff79c6}
+.purple {color: #bd93f9}
+.red {color: #ff5555}
+.yellow {color: #f1fa8c}
+
+.shade0 {color: #282a36}
+.shade1 {color: #44475a}
+.shade2 {color: #656066}
+.shade3 {color: #847E85}
+.shade4 {color: #A29DA3}
+.shade5 {color: #C1BCC2}
+.shade6 {color: #E0DCE0}
+.shade7 {color: #f8f8f2}
+
+.bg-blue {background-color: #6272a4}
+.bg-cyan {background-color: #8be9fd}
+.bg-green {background-color: #50fa7b}
+.bg-orange {background-color: #ffb86c}
+.bg-pink {background-color: #ff79c6}
+.bg-purple {background-color: #bd93f9}
+.bg-red {background-color: #ff5555}
+.bg-yellow {background-color: #f1fa8c}
+
+.bg-shade0 {background-color: #282a36}
+.bg-shade1 {background-color: #44475a}
+.bg-shade2 {background-color: #656066}
+.bg-shade3 {background-color: #847E85}
+.bg-shade4 {background-color: #A29DA3}
+.bg-shade5 {background-color: #C1BCC2}
+.bg-shade6 {background-color: #E0DCE0}
+.bg-shade7 {background-color: #f8f8f2}

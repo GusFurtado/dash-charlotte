@@ -46,13 +46,13 @@ section = html.Section(
                         y = [10,2,20,30,10,20,10,12],
                         mode = 'markers+lines'
                     ),
-                    layout = {'bg_color': 'rgba(0,0,0,0)'}
+                    layout = {'paper_bgcolor': 'rgba(0,0,0,0)'}
                 )
             )
         ),
         dbc.Row([
             dbc.Col(
-                'Apenas em Teste Qualquer',
+                'Apenas um Teste Qualquer',
                 style = {'background-color': 'lime'},
                 width = 3
             ) for _ in range(4)

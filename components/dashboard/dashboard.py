@@ -37,7 +37,7 @@ class Dashboard(html.Div):
 
         super().__init__(
             id = id,
-            className = 'dashboard-container',
+            className = 'dashboard-container shade0',
             children = [
                 dcc.Location(id=f'{id}-location'),
                 dcc.Store(id=f'{id}-data'),

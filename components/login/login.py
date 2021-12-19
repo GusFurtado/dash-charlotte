@@ -10,7 +10,6 @@ app = Dash(
     title = 'Sign in',
     external_scripts = [
         'https://kit.fontawesome.com/64d58efce2.js',
-        'https://raw.githubusercontent.com/sefyudem/Sliding-Sign-In-Sign-Up-Form/master/app.js'
     ]
 )
 

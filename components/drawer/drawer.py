@@ -5,7 +5,7 @@ from dash import html, callback, Input, Output, State, MATCH
 
 
 
-class DrawerSingleLi(html.Li):
+class DrawerSingleItem(html.Li):
     def __init__(self, link_name:str, icon:str):
         super().__init__(
             children = [
@@ -36,7 +36,7 @@ class DrawerSingleLi(html.Li):
 
 
 
-class DrawerMultiLi(html.Li):
+class DrawerMultiItem(html.Li):
 
     class ids:
         li = lambda aio_id: {
@@ -90,7 +90,14 @@ class DrawerMultiLi(html.Li):
                     children = [
                         html.Li(
                             html.A(
-                                className = 'link_name' if i==0 else '',
+                                className = 'link_name',
+                                href = '#',
+                                children = link_name
+                            )
+                        )                        
+                    ] + [
+                        html.Li(
+                            html.A(
                                 href = '#',
                                 children = subitem
                             )
@@ -112,7 +119,7 @@ class DrawerMultiLi(html.Li):
 
 
 
-class DrawerFooterLi(html.Li):
+class DrawerFooter(html.Li):
     def __init__(
             self,
             title: str,
@@ -153,27 +160,50 @@ class DrawerFooterLi(html.Li):
 
 
 class Drawer(html.Div):
+    """Barra vertical de navegação.
+
+    Parameters
+    ----------
+    menu : List of dash.html.Li
+        Lista de DrawerItems.
+    logo_name : str, optional
+        Nome da logo.
+    logo_icon : str, optional
+        Ícone da logo.
+
+    Notes
+    -----
+    Para abrir o Drawer, adicione ao layout um componente com ID 'open-drawer'
+    que ativará o callback via `n_clicks`.
+
+    """
     
     def __init__(
             self,
-            title: str,
             menu: List[html.Li],
+            logo_name: str = None,
+            logo_icon: str = None
         ):
+
+        if logo_name is None and logo_icon is None:
+            logo = None
+        else:
+            logo = html.Div(
+                className = 'logo-details',
+                children = [
+                    html.I(className=logo_icon),
+                    html.Span(
+                        className = 'logo_name',
+                        children = logo_name
+                    )
+                ]
+            )
 
         super().__init__(
             className = 'sidebar close',
             id = 'drawer',
             children = [
-                html.Div(
-                    className = 'logo-details',
-                    children = [
-                        html.I(className='bx bxl-c-plus-plus'),
-                        html.Span(
-                            className = 'logo_name',
-                            children = title
-                        )
-                    ]
-                ),
+                logo,
                 html.Ul(
                     className = 'nav-links',
                     children = menu

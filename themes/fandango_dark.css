@@ -36,3 +36,7 @@
 .bg-shade5 {background-color: #C1BCC2}
 .bg-shade6 {background-color: #E0DCE0}
 .bg-shade7 {background-color: #FFFCFF}
+
+/* Charlotte Components */
+body {background-color: #474247}
+.sidebar .nav-links li:hover{background: #66BFFF}

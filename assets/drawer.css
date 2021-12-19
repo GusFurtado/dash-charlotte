@@ -9,7 +9,6 @@
   left: 0;
   height: 100%;
   width: 260px;
-  background: #11101d;
   z-index: 100;
   transition: all 0.5s ease;
 }
@@ -24,7 +23,6 @@
 }
 .sidebar .logo-details i{
   font-size: 30px;
-  color: #fff;
   height: 50px;
   min-width: 78px;
   text-align: center;
@@ -32,7 +30,6 @@
 }
 .sidebar .logo-details .logo_name{
   font-size: 22px;
-  color: #fff;
   font-weight: 600;
   transition: 0.3s ease;
   transition-delay: 0.1s;
@@ -58,9 +55,6 @@
   list-style: none;
   transition: all 0.4s ease;
 }
-.sidebar .nav-links li:hover{
-  background: #1d1b31;
-}
 .sidebar .nav-links li .iocn-link{
   display: flex;
   align-items: center;
@@ -74,7 +68,6 @@
   min-width: 78px;
   text-align: center;
   line-height: 50px;
-  color: #fff;
   font-size: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -90,27 +83,24 @@
   align-items: center;
   text-decoration: none;
 }
-.sidebar .nav-links li a .link_name{
+.sidebar .nav-links li a .link-name{
   font-size: 18px;
   font-weight: 400;
-  color: #fff;
   transition: all 0.4s ease;
 }
-.sidebar.close .nav-links li a .link_name{
+.sidebar.close .nav-links li a .link-name{
   opacity: 0;
   pointer-events: none;
 }
 .sidebar .nav-links li .sub-menu{
   padding: 6px 6px 14px 80px;
   margin-top: -10px;
-  background: #1d1b31;
   display: none;
 }
 .sidebar .nav-links li.showMenu .sub-menu{
   display: block;
 }
 .sidebar .nav-links li .sub-menu a{
-  color: #fff;
   font-size: 15px;
   padding: 5px 0;
   white-space: nowrap;
@@ -138,10 +128,10 @@
   pointer-events: auto;
   transition: all 0.4s ease;
 }
-.sidebar .nav-links li .sub-menu .link_name{
+.sidebar .nav-links li .sub-menu .link-name{
   display: none;
 }
-.sidebar.close .nav-links li .sub-menu .link_name{
+.sidebar.close .nav-links li .sub-menu .link-name{
   font-size: 18px;
   opacity: 1;
   display: block;
@@ -164,7 +154,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #1d1b31;
   padding: 12px 0;
   transition: all 0.5s ease;
 }
@@ -184,7 +173,6 @@
   object-fit: cover;
   border-radius: 16px;
   margin: 0 14px 0 12px;
-  background: #1d1b31;
   transition: all 0.5s ease;
 }
 .sidebar.close .profile-details img{
@@ -192,7 +180,6 @@
 }
 .sidebar .profile-details .profile_name,
 .sidebar .profile-details .job{
-  color: #fff;
   font-size: 18px;
   font-weight: 500;
   white-space: nowrap;
@@ -223,7 +210,6 @@
 }
 .home-section .home-content .bx-menu,
 .home-section .home-content .text{
-  color: #11101d;
   font-size: 35px;
 }
 .home-section .home-content .bx-menu{

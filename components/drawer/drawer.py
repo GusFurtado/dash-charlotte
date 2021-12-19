@@ -12,19 +12,19 @@ class DrawerSingleItem(html.Li):
                 html.A(
                     href = '#',
                     children = [
-                        html.I(className = icon),
+                        html.I(className = f'{icon} shade7'),
                         html.Span(
-                            className = 'link_name',
+                            className = 'link-name shade7',
                             children = link_name
                         )
                     ]
                 ),
                 html.Ul(
-                    className = 'sub-menu blank',
+                    className = 'sub-menu blank bg-blue',
                     children = [
                         html.Li(
                             html.A(
-                                className = 'link_name',
+                                className = 'link-name shade7',
                                 href = '#',
                                 children = link_name
                             )
@@ -72,36 +72,37 @@ class DrawerMultiItem(html.Li):
                         html.A(
                             href = '#',
                             children = [
-                                html.I(className=icon),
+                                html.I(className=f'{icon} shade7'),
                                 html.Span(
-                                    className = 'link_name',
+                                    className = 'link-name shade7',
                                     children = link_name
                                 )
                             ]
                         ),
                         html.I(
-                            className = 'bx bxs-chevron-down arrow',
+                            className = 'bx bxs-chevron-down arrow shade7',
                             id = self.ids.arrow(aio_id)
                         )
                     ]
                 ),
                 html.Ul(
-                    className = 'sub-menu',
+                    className = 'sub-menu bg-blue',
                     children = [
                         html.Li(
                             html.A(
-                                className = 'link_name',
+                                className = 'link-name shade7',
                                 href = '#',
                                 children = link_name
                             )
-                        )                        
+                        )
                     ] + [
                         html.Li(
                             html.A(
                                 href = '#',
+                                className = 'shade7',
                                 children = subitem
                             )
-                        ) for i, subitem in enumerate(submenu)
+                        ) for subitem in submenu
                     ]
                 )
             ]
@@ -129,7 +130,7 @@ class DrawerFooter(html.Li):
         super().__init__(
             children = [
                 html.Div(
-                    className = 'profile-details',
+                    className = 'profile-details bg-blue',
                     children = [
                         html.Div(
                             className = 'profile-content',
@@ -142,11 +143,11 @@ class DrawerFooter(html.Li):
                             className = 'name-job',
                             children = [
                                 html.Div(
-                                    className = 'profile_name',
+                                    className = 'profile_name shade7',
                                     children = title
                                 ),
                                 html.Div(
-                                    className = 'job',
+                                    className = 'job shade7',
                                     children = subtitle
                                 )
                             ]
@@ -189,18 +190,18 @@ class Drawer(html.Div):
             logo = None
         else:
             logo = html.Div(
-                className = 'logo-details',
+                className = 'logo-details shade7',
                 children = [
                     html.I(className=logo_icon),
                     html.Span(
-                        className = 'logo_name',
+                        className = 'logo_name shade7',
                         children = logo_name
                     )
                 ]
             )
 
         super().__init__(
-            className = 'sidebar close',
+            className = 'sidebar bg-shade0 close',
             id = 'drawer',
             children = [
                 logo,
@@ -217,6 +218,6 @@ class Drawer(html.Div):
         State('drawer', 'className'),
         prevent_initial_call = True)
     def click(_, state):
-        if state == 'sidebar':
-            return 'sidebar close'
-        return 'sidebar'
+        if state == 'sidebar bg-shade0':
+            return 'sidebar bg-shade0 close'
+        return 'sidebar bg-shade0'

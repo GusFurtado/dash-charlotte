@@ -1,8 +1,9 @@
-from dash import dcc, html
+from dash import dcc
+from dash_bootstrap_components import Container
 
 
 
-class Dashboard(html.Div):
+class Dashboard(Container):
     """Container principal da aplicação.
 
     Parameters
@@ -37,6 +38,7 @@ class Dashboard(html.Div):
 
         super().__init__(
             id = id,
+            fluid = True,
             className = 'dashboard-container shade0',
             children = [
                 dcc.Location(id=f'{id}-location'),

@@ -26,7 +26,7 @@ section = html.Section(
     className = 'home-section',
     children = [
         html.Div(
-            className = 'home-content',
+            className = 'home-content shade7',
             children = [
                 html.I(
                     className = 'bx bx-menu',
@@ -48,7 +48,8 @@ section = html.Section(
                     ),
                     layout = {'paper_bgcolor': 'rgba(0,0,0,0)'}
                 )
-            )
+            ),
+            className = 'bg-shade7 shadow me-4 ms-4 mt-4 mb-4'
         ),
         dbc.Row([
             dbc.Col(

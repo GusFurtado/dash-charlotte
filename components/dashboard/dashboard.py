@@ -1,4 +1,4 @@
-from dash import dcc
+from dash import dcc, html
 from dash_bootstrap_components import Container
 
 
@@ -36,6 +36,9 @@ class Dashboard(Container):
             id: str = 'dashboard'
         ):
 
+        if not isinstance(children, list):
+            children = [children]
+
         super().__init__(
             id = id,
             fluid = True,
@@ -43,8 +46,10 @@ class Dashboard(Container):
             children = [
                 dcc.Location(id=f'{id}-location'),
                 dcc.Store(id=f'{id}-data'),
-                navbar,
                 drawer,
-                children
+                html.Section(
+                    className = 'home-section',
+                    children = [navbar] + children
+                )
             ]
         )

@@ -1,3 +1,4 @@
+from .boxes.box import Box
 from .dashboard.dashboard import Dashboard
 from .dashboard.navbar import Navbar
 

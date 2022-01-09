@@ -6,6 +6,7 @@ from .drawer import (
     Drawer,
     DrawerSingleItem,
     DrawerMultiItem,
+    DrawerSubItem,
     DrawerFooter
 )
 

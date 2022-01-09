@@ -6,16 +6,35 @@ from dash import html, callback, Input, Output, State, MATCH
 
 
 class DrawerSingleItem(html.Li):
-    def __init__(self, link_name:str, icon:str):
+    """An item for the Drawer menu.
+    
+    Parameters
+    ----------
+    name : str
+        Display name.
+    icon : str
+        Boxicon or Fontawesome icon code.
+    href : str, default='#'
+        Link reference.
+
+    """
+
+    def __init__(
+            self,
+            name: str,
+            icon: str,
+            href: str = '#'
+        ):
+
         super().__init__(
             children = [
                 html.A(
-                    href = '#',
+                    href = href,
                     children = [
                         html.I(className = f'{icon} shade7'),
                         html.Span(
                             className = 'link-name shade7',
-                            children = link_name
+                            children = name
                         )
                     ]
                 ),
@@ -25,8 +44,8 @@ class DrawerSingleItem(html.Li):
                         html.Li(
                             html.A(
                                 className = 'link-name shade7',
-                                href = '#',
-                                children = link_name
+                                href = href,
+                                children = name
                             )
                         )
                     ]
@@ -36,7 +55,51 @@ class DrawerSingleItem(html.Li):
 
 
 
+class DrawerSubItem(html.Li):
+    """An item for the DrawerMultiItem submenu.
+    
+    Parameters
+    ----------
+    name : str
+        Display name.
+    href : str, default='#'
+        Link reference.
+
+    """
+
+    def __init__(
+            self,
+            name: str,
+            href: str = '#'
+        ):
+
+        super().__init__(
+            children = html.A(
+                href = href,
+                className = 'shade7',
+                children = name                
+            )
+        )
+
+
+
 class DrawerMultiItem(html.Li):
+    """An AIO component for the Drawer menu containing a submenu.
+
+    Parameters
+    ----------
+    name : str
+        Display name.
+    icon : str
+        Boxicon or Fontawesome icon code.
+    submenu : list of dash_charlotte.components.drawer.DrawerSubitem
+        A list of DrawerSubItem.
+    aio_id : str
+        AIO identification.
+    href : str, default='#'
+        Link reference.
+    
+    """
 
     class ids:
         li = lambda aio_id: {
@@ -53,14 +116,18 @@ class DrawerMultiItem(html.Li):
 
     def __init__(
             self,
-            link_name: str,
+            name: str,
             icon: str,
-            submenu: list,
-            aio_id = None
+            submenu: List[DrawerSubItem],
+            aio_id: str = None,
+            href: str = '#'
         ):
 
         if aio_id is None:
             aio_id = str(uuid.uuid4())
+
+        if not isinstance(submenu, list):
+            submenu = [submenu]
 
         super().__init__(
             className = 'hideMenu',
@@ -70,12 +137,12 @@ class DrawerMultiItem(html.Li):
                     className = 'iocn-link',
                     children = [
                         html.A(
-                            href = '#',
+                            href = href,
                             children = [
                                 html.I(className=f'{icon} shade7'),
                                 html.Span(
                                     className = 'link-name shade7',
-                                    children = link_name
+                                    children = name
                                 )
                             ]
                         ),
@@ -91,19 +158,11 @@ class DrawerMultiItem(html.Li):
                         html.Li(
                             html.A(
                                 className = 'link-name shade7',
-                                href = '#',
-                                children = link_name
+                                href = href,
+                                children = name
                             )
                         )
-                    ] + [
-                        html.Li(
-                            html.A(
-                                href = '#',
-                                className = 'shade7',
-                                children = subitem
-                            )
-                        ) for subitem in submenu
-                    ]
+                    ] + submenu
                 )
             ]
         )
@@ -174,8 +233,8 @@ class Drawer(html.Div):
 
     Notes
     -----
-    Para abrir o Drawer, adicione ao layout um componente com ID 'open-drawer'
-    que ativará o callback via `n_clicks`.
+    To open the Drawer, add a component with 'open-drawer' as ID to your
+    layout. Activete the callback by its `n_clicks` attribute.
 
     """
     

@@ -9,6 +9,7 @@ from dash_charlotte.components import (
     Drawer,
     DrawerSingleItem,
     DrawerMultiItem,
+    DrawerSubItem,
     Navbar
 )
 
@@ -32,42 +33,56 @@ pio.templates.default = 'plotly_white'
 
 nav_links = [
     DrawerSingleItem(
-        link_name = 'Dashboard',
+        name = 'Page 1',
+        icon = 'bx bx-pie-chart-alt-2',
+        href = '/page1'
+    ),
+    DrawerSingleItem(
+        name = 'Page 2',
+        icon = 'bx bx-line-chart',
+        href = '/page2'
+    ),
+    DrawerSingleItem(
+        name = 'Dashboard',
         icon = 'bx bx-grid-alt'
     ),
     DrawerMultiItem(
-        link_name = 'Category',
+        name = 'Category',
         icon = 'bx bx-collection',
-        submenu = ['HTML & CSS', 'JavaScript', 'PHP & MySQL']
+        submenu = [
+            DrawerSubItem('HTML & CSS'),
+            DrawerSubItem('JavaScript'),
+            DrawerSubItem('PHP & MySQL')
+        ]
     ),
     DrawerMultiItem(
-        link_name = 'Posts',
+        name = 'Posts',
         icon = 'bx bx-book-alt',
-        submenu = ['Web Design', 'Login Form', 'Card Design']
-    ),
-    DrawerSingleItem(
-        link_name = 'Analytics',
-        icon = 'bx bx-pie-chart-alt-2'
-    ),
-    DrawerSingleItem(
-        link_name = 'Chart',
-        icon = 'bx bx-line-chart'
+        submenu = [
+            DrawerSubItem('Web Design'),
+            DrawerSubItem('Login Form'),
+            DrawerSubItem('Card Design')
+        ]
     ),
     DrawerMultiItem(
-        link_name = 'Plugins',
+        name = 'Plugins',
         icon = 'bx bx-plug',
-        submenu = ['UI Face', 'Pigments', 'Box Icons']
+        submenu = [
+            DrawerSubItem('UI Face'),
+            DrawerSubItem('Pigments'),
+            DrawerSubItem('Box Icons')
+        ]
     ),
     DrawerSingleItem(
-        link_name = 'Explore',
+        name = 'Explore',
         icon = 'bx bx-compass'
     ),
     DrawerSingleItem(
-        link_name = 'History',
+        name = 'History',
         icon = 'bx bx-history'
     ),
     DrawerSingleItem(
-        link_name = 'Setting',
+        name = 'Setting',
         icon = 'bx bx-cog'
     )
 ]

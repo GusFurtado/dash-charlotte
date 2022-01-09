@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 import dash_labs as dl
 import plotly.io as pio
 
-from components import (
+from dash_charlotte.components import (
     BOXICONS,
     Dashboard,
     Drawer,
@@ -88,4 +88,5 @@ app.layout = Dashboard(
 
 
 
-app.run_server()
+if __name__ == '__main__':
+    app.run_server()

@@ -4,8 +4,8 @@ import dash_bootstrap_components as dbc
 import numpy as np
 import plotly.graph_objects as go
 
-from components import Box
-import themes.fandango_light as fl
+from dash_charlotte.components import Box
+import dash_charlotte.themes.fandango_light as fl
 
 
 

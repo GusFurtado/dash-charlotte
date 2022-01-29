@@ -1,16 +1,9 @@
-from dash import Dash
-from dash.dependencies import Input, Output
-import dash_html_components as html
-import dash_core_components as dcc
-
-
-
-app = Dash(
-    name = __name__,
-    title = 'Sign in',
-    external_scripts = [
-        'https://kit.fontawesome.com/64d58efce2.js',
-    ]
+from dash import (
+    html,
+    dcc,
+    Input,
+    Output,
+    callback
 )
 
 
@@ -180,29 +173,25 @@ panels_container = html.Div(
 
 
 
-app.layout = html.Div(
-    className = 'container',
-    id = 'container',
-    children = [
-        forms_container,
-        panels_container
-    ]
-)
+class LoginContainer(html.Div):
 
+    def __init__(self):
+        super().__init__(
+            className = 'login_container',
+            id = 'login_container',
+            children = [
+                forms_container,
+                panels_container
+            ]
+        )
 
-
-@app.callback(
-    Output('container', 'className'),
-    Input('sign-up-btn', 'n_clicks_timestamp'),
-    Input('sign-in-btn', 'n_clicks_timestamp'),
-    prevent_initial_call = True)
-def click(signup, signin):
-    print(signup, signin)
-    if signup > signin:
-        return 'container sign-up-mode'
-    return 'container'
-
-
-
-if __name__ == '__main__':
-    app.run_server()
+    @callback(
+        Output('login_container', 'className'),
+        Input('sign-up-btn', 'n_clicks_timestamp'),
+        Input('sign-in-btn', 'n_clicks_timestamp'),
+        prevent_initial_call = True)
+    def click(signup, signin):
+        print(signup, signin)
+        if signup > signin:
+            return 'container sign-up-mode'
+        return 'container'

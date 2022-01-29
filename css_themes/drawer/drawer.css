@@ -28,6 +28,15 @@
   text-align: center;
   line-height: 50px;
 }
+.logo_img_wrapper {
+  height: 50px;
+  min-width: 78px;
+  text-align: center;
+  padding: 10px; 
+}
+.logo_img_wrapper img{
+  height: 30px;
+}
 .sidebar .logo-details .logo_name{
   font-size: 22px;
   font-weight: 600;

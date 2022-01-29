@@ -1,7 +1,14 @@
-from typing import List
+from typing import List, Optional
 import uuid
 
-from dash import html, callback, Input, Output, State, MATCH
+from dash import (
+    html,
+    callback,
+    Input,
+    Output,
+    State,
+    MATCH
+)
 
 
 
@@ -70,14 +77,14 @@ class DrawerSubItem(html.Li):
     def __init__(
             self,
             name: str,
-            href: str = '#'
+            **kwargs
         ):
 
         super().__init__(
             children = html.A(
-                href = href,
+                children = name,
                 className = 'shade7',
-                children = name                
+                **kwargs
             )
         )
 
@@ -225,33 +232,52 @@ class Drawer(html.Div):
     Parameters
     ----------
     menu : List of dash.html.Li
-        Lista de DrawerItems.
+        Add a list of href icons.
     logo_name : str, optional
-        Nome da logo.
+        Name displayed above the menu.
     logo_icon : str, optional
-        Ícone da logo.
+        Class name of the web icon.
+    logo_img : str, optional
+        Link of an image.
 
     Notes
     -----
-    To open the Drawer, add a component with 'open-drawer' as ID to your
-    layout. Activete the callback by its `n_clicks` attribute.
+    [1] To open the Drawer, add a component with 'open-drawer' as ID to your
+        layout. Activete the callback by its `n_clicks` attribute.
+    [2] You can only add one `logo_icon` or `logo_img` arguments.
 
     """
     
     def __init__(
             self,
             menu: List[html.Li],
-            logo_name: str = None,
-            logo_icon: str = None
+            logo_name: Optional[str] = None,
+            logo_icon: Optional[str] = None,
+            logo_img: Optional[str] = None,
         ):
 
-        if logo_name is None and logo_icon is None:
+        # No logo at all
+        if all(x is None for x in [logo_name, logo_icon, logo_img]):
             logo = None
+
+        # Oops... You shouldn't choose both of them
+        elif (logo_icon is not None) and (logo_img is not None):
+            raise ValueError('One of `logo_icon` or `logo_img` must be `None`.')
+
         else:
+
+            if logo_icon is not None:
+                logo_i = html.I(className=logo_icon)
+            elif logo_img is not None:
+                logo_i = html.Span(
+                    html.Img(src=logo_img),
+                    className = 'logo_img_wrapper'
+                )
+
             logo = html.Div(
                 className = 'logo-details shade7',
                 children = [
-                    html.I(className=logo_icon),
+                    logo_i,
                     html.Span(
                         className = 'logo_name shade7',
                         children = logo_name

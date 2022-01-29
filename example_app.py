@@ -89,15 +89,21 @@ nav_links = [
 
 
 
+LOGO_IMG = 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_TV_2015.png'
+LOGO_ICON = 'bx bxl-c-plus-plus'
+
+
+
 app.layout = Dashboard(
     children = dl.plugins.page_container,
     navbar = Navbar(
-        title = 'Teste de Navbar'
+        title = 'Navbar'
     ),
     drawer = Drawer(
         menu = nav_links,
         logo_name = 'Charlotte',
-        logo_icon = 'bx bxl-c-plus-plus'
+        #logo_icon = LOGO_ICON,
+        logo_img = LOGO_IMG
     )
 )
 

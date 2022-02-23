@@ -124,7 +124,7 @@ left_panel = html.Div(
             ]
         ),
         html.Img(
-            src = 'assets/img/log.svg',
+            src = '/assets/img/log.svg',
             className = 'image',
             alt = ''
         )
@@ -154,7 +154,7 @@ right_panel = html.Div(
             ]
         ),
         html.Img(
-            src = 'assets/img/register.svg',
+            src = '/assets/img/register.svg',
             className = 'image',
             alt = ''
         )

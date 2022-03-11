@@ -9,10 +9,3 @@ from .drawer import (
     DrawerSubItem,
     DrawerFooter
 )
-
-#from .login import *
-
-from .utils import (
-    BOXICONS,
-    FONTAWESOME
-)

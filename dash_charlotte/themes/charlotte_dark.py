@@ -1,4 +1,4 @@
-"""Fandango Dark Theme.
+"""Charlotte Dark Theme.
 
 """
 

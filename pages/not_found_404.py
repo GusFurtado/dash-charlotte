@@ -1,5 +1,5 @@
 from dash import register_page
-from dash_charlotte.layouts.not_found_404 import NotFound404
+from dash_charlotte.layouts import NotFound404
 
 
 

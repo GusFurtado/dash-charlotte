@@ -3,8 +3,12 @@ import dash_bootstrap_components as dbc
 import dash_labs as dl
 import plotly.io as pio
 
-from dash_charlotte.components import (
+from dash_charlotte.themes import (
     BOXICONS,
+    CHARLOTTE_LIGHT
+)
+
+from dash_charlotte.components import (
     Dashboard,
     Drawer,
     DrawerSingleItem,
@@ -21,6 +25,7 @@ app = Dash(
     plugins=[dl.plugins.pages],
     external_stylesheets = [
         BOXICONS,
+        CHARLOTTE_LIGHT,
         dbc.themes.GRID
     ]
 )

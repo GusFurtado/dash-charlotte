@@ -5,7 +5,7 @@ import numpy as np
 import plotly.graph_objects as go
 
 from dash_charlotte.components import Box
-import dash_charlotte.themes.fandango_light as fl
+import dash_charlotte.themes.charlotte_light as cl
 
 
 
@@ -18,10 +18,10 @@ dash.register_page(
 
 
 COLORS = [
-    str(fl.RED),
-    str(fl.YELLOW),
-    str(fl.ORANGE),
-    str(fl.BLUE)
+    str(cl.RED),
+    str(cl.YELLOW),
+    str(cl.ORANGE),
+    str(cl.BLUE)
 ]
 
 

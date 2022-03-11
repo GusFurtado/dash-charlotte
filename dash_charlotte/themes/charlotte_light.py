@@ -1,4 +1,4 @@
-"""Fandango Light Theme.
+"""Charlotte Light Theme.
 
 """
 

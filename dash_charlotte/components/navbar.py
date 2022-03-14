@@ -23,9 +23,6 @@ class Navbar(html.Nav):
         
         """
 
-        if id is None:
-            id = str(uuid.uuid4())
-
         super().__init__(
             className = 'home-content shade7',
             children = [
@@ -36,7 +33,7 @@ class Navbar(html.Nav):
                 html.Span(
                     className = 'text',
                     children = title,
-                    id = id
+                    id = id or str(uuid.uuid4())
                 )
             ]
         )

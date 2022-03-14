@@ -130,9 +130,7 @@ class DrawerMultiItem(html.Li):
             href: str = '#'
         ):
 
-        if aio_id is None:
-            aio_id = str(uuid.uuid4())
-
+        aio_id = aio_id or str(uuid.uuid4())
         if not isinstance(submenu, list):
             submenu = [submenu]
 

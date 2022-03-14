@@ -191,7 +191,6 @@ class LoginContainer(html.Div):
         Input('sign-in-btn', 'n_clicks_timestamp'),
         prevent_initial_call = True)
     def click(signup, signin):
-        print(signup, signin)
         if signup > signin:
             return 'container sign-up-mode'
         return 'container'

@@ -1,14 +1,48 @@
 from typing import Optional
+from uuid import uuid4
 
 from dash import html
 
 
 
 class Box(html.Div):
-    """Simple box.
+    """Default box.
 
-    Subclass of dash.html.Div.
-    
+    Parameters
+    ----------
+    children : Dash component | list of Dash components, optional
+        Main content of the box.
+    title : Dash component | list of Dash components, optional
+        Box title.
+    subtitle : Dash component | list of Dash components, optional
+        Box subtitle.
+    title_color : str, default='blue'
+        Title color.
+    title_style : dict[str, str], optional
+    icon : str, optional
+        Icon next to the title.
+    header_content : Dash component | list of Dash components, optional
+        Content on the upper right of the box.
+    style : dict[str, str], optional
+        Style of the box.
+    padding : float, default=10
+        Level of spacing between components.
+    id : str, optional
+        Component id.
+
+    Components IDs
+    --------------
+    {id}
+        Main content (children).
+    {id}--title
+        Title of the box.
+    {id}--subtitle
+        Subtitle of the box.
+    {id}--title-style
+        Style of the box title.
+    {id}--header-content
+        Content on the upper right of the box.
+
     """
 
     def __init__(
@@ -16,11 +50,16 @@ class Box(html.Div):
             children = None,
             title = None,
             subtitle = None,
+            title_color: str = 'blue',
+            title_style: Optional[dict] = None,
             icon: Optional[str] = None,
             header_content = None,
             style: Optional[dict] = None,
-            padding: float = 10
+            padding: float = 10,
+            id: Optional[str] = None
         ):
+
+        id = id or str(uuid4())
 
         box_style = {
             'background-color': 'white',
@@ -38,13 +77,17 @@ class Box(html.Div):
                 self.header(
                     title = title,
                     subtitle = subtitle,
+                    title_color = title_color,
+                    title_style = title_style,
                     icon = icon,
-                    content = header_content,
-                    padding = padding
+                    header_content = header_content,
+                    padding = padding,
+                    id = id
                 ),
                 self.content(
                     content = children,
-                    padding = padding
+                    padding = padding,
+                    id = id
                 )
             ]
         )
@@ -54,37 +97,52 @@ class Box(html.Div):
             self,
             title,
             subtitle,
+            title_color,
+            title_style,
             icon,
-            content,
-            padding
+            header_content,
+            padding,
+            id
         ) -> html.Div:
 
-        if title is not None:
-            title = html.Span(title)
+        title = html.Span(
+            title,
+            id = f'{id}--title'
+        )
 
-        if subtitle is not None:
-            subtitle = html.Span(
-                children = subtitle,
-                className = 'shade4',
-                style = {
-                    'font-size': 16
-                }
-            )
+        subtitle = html.Span(
+            children = subtitle,
+            id = f'{id}--subtitle',
+            className = 'shade4',
+            style = {
+                'font-size': 16
+            }
+        )
 
         if icon is not None:
-            icon = html.I(className=f'{icon} me-2')
+            icon = html.I(
+                className = f'{icon} me-2',
+                id = f'{id}--icon'    
+            )
 
-        if content is not None:
-            content = html.Div(content)
+        header_content = html.Div(
+            children = header_content,
+            id = f'{id}--header-content'
+        )
+
+        style = {
+            'font-size': 22,
+            'font-weight': 'bold'
+        }
+        if title_style is not None:
+            style.update(title_style)
 
         title_stuff = html.Div([
             html.Div(
                 children = [icon, title],
-                className = 'blue',
-                style = {
-                    'font-size': 22,
-                    'font-weight': 'bold'
-                }
+                className = title_color,
+                style = style,
+                id = f'{id}--title-style'
             ),
             subtitle
         ])
@@ -92,7 +150,7 @@ class Box(html.Div):
         return html.Div(
             children = [
                 title_stuff,
-                content
+                header_content
             ],
             style = {
                 'display': 'flex',
@@ -102,9 +160,10 @@ class Box(html.Div):
         )
 
 
-    def content(self, content, padding) -> html.Div:
+    def content(self, content, padding, id) -> html.Div:
         return html.Div(
             children = content,
+            id = id,
             style = {
                 'padding': 2 * padding,
                 'padding-top': padding

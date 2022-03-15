@@ -3,10 +3,7 @@ import dash_bootstrap_components as dbc
 import dash_labs as dl
 import plotly.io as pio
 
-from dash_charlotte.themes import (
-    BOXICONS,
-    CHARLOTTE_LIGHT
-)
+from dash_charlotte import themes
 
 from dash_charlotte.components import (
     Dashboard,
@@ -16,16 +13,19 @@ from dash_charlotte.components import (
     DrawerSubItem,
     Navbar
 )
+from dash_charlotte.components.drawer import DrawerFooter
 
 
 
 app = Dash(
     name = __name__,
     title = 'Dash Charlotte',
-    plugins=[dl.plugins.pages],
+    plugins = [dl.plugins.pages],
     external_stylesheets = [
-        BOXICONS,
-        CHARLOTTE_LIGHT,
+        themes.BOOTSTRAP,
+        themes.BOXICONS,
+        themes.FONTAWESOME,
+        themes.CHARLOTTE_LIGHT,
         dbc.themes.GRID
     ]
 )
@@ -48,8 +48,9 @@ nav_links = [
         href = '/page2'
     ),
     DrawerSingleItem(
-        name = 'Dashboard',
-        icon = 'bx bx-grid-alt'
+        name = 'Icons',
+        icon = 'bx bx-grid-alt',
+        href = '/icons'
     ),
     DrawerMultiItem(
         name = 'Category',
@@ -86,9 +87,9 @@ nav_links = [
         name = 'History',
         icon = 'bx bx-history'
     ),
-    DrawerSingleItem(
-        name = 'Setting',
-        icon = 'bx bx-cog'
+    DrawerFooter(
+        title = 'Footer',
+        subtitle = 'Footer Subtitle'
     )
 ]
 

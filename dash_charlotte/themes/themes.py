@@ -1,4 +1,4 @@
-"""Dash Charlotte Themes
+"""CDN Links for Dash Charlotte Themes.
 
 """
 

@@ -185,10 +185,13 @@ class DrawerMultiItem(html.Li):
 
 
 class DrawerFooter(html.Li):
+    
     def __init__(
             self,
-            title: str,
-            subtitle: str
+            title = None,
+            subtitle = None,
+            icon: str = 'bx bx-log-out',
+            img_src: str = None
         ):
 
         super().__init__(
@@ -198,10 +201,7 @@ class DrawerFooter(html.Li):
                     children = [
                         html.Div(
                             className = 'profile-content',
-                            # children = html.Img(
-                            #     src = 'image/profile.jpg',
-                            #     alt = 'profileImg'
-                            # )
+                            children = html.Img(src=img_src)
                         ),
                         html.Div(
                             className = 'name-job',
@@ -216,7 +216,7 @@ class DrawerFooter(html.Li):
                                 )
                             ]
                         ),
-                        html.I(className='bx bx-log-out')
+                        html.I(className = f'{icon} shade7')
                     ]
                 )
             ]

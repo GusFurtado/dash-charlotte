@@ -4,7 +4,7 @@
 
 
 
-ROOT = r'https://cdn.jsdelivr.net/gh/GusFurtado/dash-charlotte@master/css_themes/'
+ROOT = r'https://gusfurtado.github.io/dash-charlotte/css_themes/'
 
 CHARLOTTE_DARK = ROOT + 'charlotte_dark.css'
 CHARLOTTE_LIGHT = ROOT + 'charlotte_light.css'

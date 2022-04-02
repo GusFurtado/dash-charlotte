@@ -62,9 +62,7 @@ class Box(html.Div):
         id = id or str(uuid4())
 
         box_style = {
-            'background-color': 'white',
             'border-radius': 10,
-            'box-shadow': '5px 10px 8px #888888',
             'margin': 10
         }
 
@@ -73,6 +71,7 @@ class Box(html.Div):
 
         super().__init__(
             style = box_style,
+            className = 'bg-shade0 shadow',
             children = [
                 self.header(
                     title = title,

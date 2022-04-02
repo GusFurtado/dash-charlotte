@@ -24,7 +24,7 @@ app = Dash(
         themes.BOOTSTRAP,
         themes.BOXICONS,
         themes.FONTAWESOME,
-        themes.CHARLOTTE_LIGHT
+        themes.DRACULA
     ]
 )
 
@@ -70,7 +70,7 @@ nav_links = [
 
 
 LOGO_IMG = 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_TV_2015.png'
-LOGO_ICON = 'bx bxl-c-plus-plus'
+LOGO_ICON = 'fas fa-rocket'
 
 
 
@@ -82,8 +82,8 @@ app.layout = Dashboard(
     drawer = Drawer(
         menu = nav_links,
         logo_name = 'Charlotte',
-        #logo_icon = LOGO_ICON,
-        logo_img = LOGO_IMG
+        logo_icon = LOGO_ICON,
+        #logo_img = LOGO_IMG
     )
 )
 

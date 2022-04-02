@@ -39,6 +39,7 @@ layout = [
                             marker_color = COLORS
                         ),
                         layout = {
+                            'plot_bgcolor': 'rgba(0,0,0,0)',
                             'paper_bgcolor': 'rgba(0,0,0,0)',
                             'margin': {
                                 't': 20, 'b': 20, 'l': 20, 'r': 20
@@ -67,6 +68,7 @@ layout = [
                             }
                         ),
                         layout = {
+                            'plot_bgcolor': 'rgba(0,0,0,0)',
                             'paper_bgcolor': 'rgba(0,0,0,0)',
                             'margin': {
                                 't': 20, 'b': 20, 'l': 20, 'r': 20

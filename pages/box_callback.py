@@ -96,7 +96,6 @@ def input_subtitle(subtitle):
     Input('input-color', 'value'),
     State('the-box--title-style', 'style'))
 def input_title(color, style):
-    print(style)
     style['color'] = color
     return style
 

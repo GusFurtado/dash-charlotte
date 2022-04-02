@@ -1,196 +1,145 @@
+from typing import List
+
 from dash import (
     html,
-    dcc,
-    Input,
-    Output,
-    callback
+    dcc
 )
+import dash_bootstrap_components as dbc
 
 
 
-sign_in_form = html.Form(
-    className = 'sign-in-form',
-    children = [
-        html.H2(
-            className = 'title',
-            children = 'Sign in'
-        ),
-        html.Div(
-            className = 'input-field',
-            children = [
-                html.I(
-                    className = 'fas fa-user'
-                ),
-                dcc.Input(
-                    type = 'text',
-                    placeholder = 'Username'
-                )
-            ]
-        ),
-        html.Div(
-            className = 'input-field',
-            children = [
-                html.I(
-                    className = 'fas fa-lock'
-                ),
-                dcc.Input(
-                    type = 'password',
-                    placeholder = 'Password'
-                )
-            ]
-        ),
-        dcc.Input(
-            type = 'submit',
-            value = 'Login',
-            className = 'btn solid'
-        )
-    ]
-)
+class SvgImage(html.Div):
 
+    def __init__(
+            self,
+            src: str
+        ):
 
-
-sign_up_form = html.Form(
-    className = 'sign-up-form',
-    children = [
-        html.H2(
-            className = 'title',
-            children = 'Sign up'
-        ),
-        html.Div(
-            className = 'input-field',
-            children = [
-                html.I(
-                    className = 'fas fa-user'
-                ),
-                dcc.Input(
-                    type = 'text',
-                    placeholder = 'Username'
-                )
-            ]
-        ),
-        html.Div(
-            className = 'input-field',
-            children = [
-                html.I(
-                    className = 'fas fa-lock'
-                ),
-                dcc.Input(
-                    type = 'password',
-                    placeholder = 'Password'
-                )
-            ]
-        ),
-        dcc.Input(
-            type = 'submit',
-            value = 'Sign up',
-            className = 'btn solid'
-        )
-    ]
-)
-
-
-
-forms_container = html.Div(
-    className = 'forms-container',
-    children = html.Div(
-        className = 'signin-signup',
-        children = [
-            sign_in_form,
-            sign_up_form
-        ]
-    )
-)
-
-
-
-left_panel = html.Div(
-    className = 'panel left-panel',
-    children = [
-        html.Div(
-            className = 'content',
-            children = [
-                html.H3(
-                    children = 'New here?'
-                ),
-                html.P(
-                    children = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!'
-                ),
-                html.Button(
-                    className = 'btn transparent',
-                    id = 'sign-up-btn',
-                    children = 'Sign up',
-                    n_clicks_timestamp = 0
-                )
-            ]
-        ),
-        html.Img(
-            src = '/assets/img/log.svg',
-            className = 'image',
-            alt = ''
-        )
-    ]
-)
-
-
-
-right_panel = html.Div(
-    className = 'panel right-panel',
-    children = [
-        html.Div(
-            className = 'content',
-            children = [
-                html.H3(
-                    children = 'One of us?'
-                ),
-                html.P(
-                    children = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!'
-                ),
-                html.Button(
-                    className = 'btn transparent',
-                    id = 'sign-in-btn',
-                    children = 'Sign in',
-                    n_clicks_timestamp = 0
-                )
-            ]
-        ),
-        html.Img(
-            src = '/assets/img/register.svg',
-            className = 'image',
-            alt = ''
-        )
-    ]
-)
-
-
-
-panels_container = html.Div(
-    className = 'panels-container',
-    children = [
-        left_panel,
-        right_panel
-    ]
-)
-
-
-
-class LoginContainer(html.Div):
-
-    def __init__(self):
         super().__init__(
-            className = 'login_container',
-            id = 'login_container',
+            className = 'login-svg-image',
+            children = html.Img(
+                src = src,
+                style = {
+                    'maxHeight': '100%',
+                    'maxWidth': '100%'
+                }
+            )
+        )
+
+
+
+class LoginForm(html.Div):
+
+    def __init__(
+            self,
+            title_text: str = 'Log in',
+            email_placeholder: str = 'Username',
+            password_placeholder: str = 'Password',
+            button_text: str = 'Log in',
+            button_color: str = 'blue'
+        ):
+
+        super().__init__(
+            style = {
+                'minHeight': '100%',
+                'text-align': 'left',
+                'padding': 20
+            },
+            className = 'bg-shade0',
+            children = html.Form(
+                className = 'sign-in-form',
+                children = [
+                    self.title_text(
+                        text = title_text
+                    ),
+                    self.email_input(
+                        placeholder = email_placeholder
+                    ),
+                    self.password_input(
+                        placeholder = password_placeholder
+                    ),
+                    self.submit_button(
+                        text = button_text,
+                        color = button_color
+                    )
+                ]
+            )
+        )
+
+
+    def title_text(self, text) -> html.H2:
+        return html.H2(
+            className = 'shade6',
+            children = text,
+            style = {
+                'font-size': '2.2rem',
+                'margin-bottom': '10px',
+            }
+        )
+
+
+    def email_input(self, placeholder:str) -> html.Div:
+        return html.Div(
+            className = 'input-field',
             children = [
-                forms_container,
-                panels_container
+                html.I(
+                    className = 'fas fa-user'
+                ),
+                dcc.Input(
+                    type = 'text',
+                    placeholder = placeholder
+                )
             ]
         )
 
-    @callback(
-        Output('login_container', 'className'),
-        Input('sign-up-btn', 'n_clicks_timestamp'),
-        Input('sign-in-btn', 'n_clicks_timestamp'),
-        prevent_initial_call = True)
-    def click(signup, signin):
-        if signup > signin:
-            return 'container sign-up-mode'
-        return 'container'
+
+    def password_input(self, placeholder:str) -> html.Div:
+        return html.Div(
+            className = 'input-field',
+            children = [
+                html.I(
+                    className = 'fas fa-lock'
+                ),
+                dcc.Input(
+                    type = 'password',
+                    placeholder = placeholder
+                )
+            ]
+        )
+
+
+    def submit_button(self, text:str, color:str) -> dcc.Input:
+        return dcc.Input(
+            type = 'submit',
+            value = text,
+            className = f'login-button bg-{color} bg-hover-{color}'
+        )
+
+
+
+class LoginPage(dbc.Container):
+
+    def __init__(self, left_panel, right_panel):
+        super().__init__(
+            children = dbc.Row([
+                dbc.Col(
+                    left_panel,
+                    width = 6,
+                    style = {'min-height': '100%'}
+                ),
+                dbc.Col(
+                    right_panel,
+                    width = 6,
+                    style = {'min-height': '100%'}
+                )
+            ],
+                class_name = 'g-0 shadow'
+            ),
+            style = {
+                'display': 'flex',
+                'justify-content': 'center',
+                'align-items': 'center',
+                'text-align': 'center',
+                'min-height': '90vh'
+            }
+        )

@@ -24,7 +24,7 @@ app = Dash(
         themes.BOOTSTRAP,
         themes.BOXICONS,
         themes.FONTAWESOME,
-        themes.CHARLOTTE_LIGHT
+        #themes.CHARLOTTE_LIGHT
     ]
 )
 
@@ -32,14 +32,24 @@ app = Dash(
 
 nav_links = [
     DrawerSingleItem(
-        name = 'Page 1',
-        icon = 'bx bx-pie-chart-alt-2',
-        href = '/page1'
+        name = 'Login',
+        icon = 'bx bx-log-in',
+        href = '/login'
     ),
-    DrawerSingleItem(
-        name = 'Page 2',
+    DrawerMultiItem(
+        name = 'Analytics',
         icon = 'bx bx-line-chart',
-        href = '/page2'
+        href = '/page2',
+        submenu = [
+            DrawerSubItem(
+                name = 'Page 1',
+                href = '/page1'
+            ),
+            DrawerSubItem(
+                name = 'Page 2',
+                href = '/page2'
+            )
+        ]
     ),
     DrawerSingleItem(
         name = 'Icons',
@@ -50,32 +60,6 @@ nav_links = [
         name = 'Box',
         icon = 'bx bx-box',
         href = '/box'
-    ),
-    DrawerMultiItem(
-        name = 'Category',
-        icon = 'bx bx-collection',
-        submenu = [
-            DrawerSubItem('HTML & CSS'),
-            DrawerSubItem('JavaScript'),
-            DrawerSubItem('PHP & MySQL')
-        ]
-    ),
-    DrawerMultiItem(
-        name = 'Posts',
-        icon = 'bx bx-book-alt',
-        submenu = [
-            DrawerSubItem('Web Design'),
-            DrawerSubItem('Login Form'),
-            DrawerSubItem('Card Design')
-        ]
-    ),
-    DrawerSingleItem(
-        name = 'Explore',
-        icon = 'bx bx-compass'
-    ),
-    DrawerSingleItem(
-        name = 'History',
-        icon = 'bx bx-history'
     ),
     DrawerFooter(
         title = 'Footer',

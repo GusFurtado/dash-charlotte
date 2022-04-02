@@ -24,7 +24,7 @@ app = Dash(
         themes.BOOTSTRAP,
         themes.BOXICONS,
         themes.FONTAWESOME,
-        #themes.CHARLOTTE_LIGHT
+        themes.CHARLOTTE_LIGHT
     ]
 )
 

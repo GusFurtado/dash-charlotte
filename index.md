@@ -1,37 +1,31 @@
-## Welcome to GitHub Pages
+# Dash Charlotte
 
-You can use the [editor on GitHub](https://github.com/GusFurtado/dash-charlotte/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+A package of themes, tools and components that I use on my Plotly-Dash web dashboards.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This is still a super early work in progress and probably not very interesting, so don't waste your time here.
 
-### Markdown
+## Submodules
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- [**Components**](https://github.com/GusFurtado/dash-charlotte/tree/main/dash_charlotte/components)
 
-```markdown
-Syntax highlighted code block
+A set of standard Dash components for a fast and modular dashboard building.
 
-# Header 1
-## Header 2
-### Header 3
+- [**Themes**](https://github.com/GusFurtado/dash-charlotte/tree/main/dash_charlotte/themes)
 
-- Bulleted
-- List
+Tools for easy and consistent styling. Colors, fonts, icon packages and CSS stuff.
 
-1. Numbered
-2. List
+- [**Layouts**](https://github.com/GusFurtado/dash-charlotte/tree/main/dash_charlotte/layouts)
 
-**Bold** and _Italic_ and `Code` text
+Some pre-built page layouts.
 
-[Link](url) and ![Image](src)
-```
+## Instatlation
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+- `pip install dash-charlotte`
 
-### Jekyll Themes
+## License
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/GusFurtado/dash-charlotte/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+- [**MIT**]([LICENSE])
 
-### Support or Contact
+## Getting Started
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Check the [example app](https://github.com/GusFurtado/dash-charlotte/blob/main/example_app.py).

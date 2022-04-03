@@ -28,4 +28,4 @@ Some pre-built page layouts.
 
 ## Getting Started
 
-Check the [example app](https://github.com/GusFurtado/dash-charlotte/blob/main/example_app.py).
+Check the [example app](https://github.com/GusFurtado/dash-charlotte/tree/deploy).

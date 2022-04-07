@@ -28,4 +28,4 @@ Some pre-built page layouts.
 
 ## Getting Started
 
-Check the [example app](https://github.com/GusFurtado/dash-charlotte/tree/deploy).
+Check the [example app](https://github.com/GusFurtado/dash-charlotte/tree/deploy) or the [live demo](https://dash-charlotte.herokuapp.com/).

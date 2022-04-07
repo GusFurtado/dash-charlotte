@@ -3,19 +3,41 @@ from dash import html
 
 
 class NotFound404(html.Div):
-    def __init__(self, top_message, bottom_message):
+    """Layout for 404 error page.
+
+    Parameters
+    ----------
+    top_message : str | list of Dash components
+        Main text of the page.
+    bottom_message : str | list of Dash components
+        Subtext of the page.
+    src : str
+        Image source.
+    color : str, default='blue'
+        Color class of the top message.
+
+    """
+
+    def __init__(
+            self,
+            top_message: str,
+            bottom_message: str,
+            src: str,
+            color: str = 'blue'
+        ):
+
         super().__init__(
             children = html.Div([
-                html.H2(
+                html.H1(
                     children = top_message,
-                    className = 'blue'    
+                    className = color
                 ),
-                html.H3(
+                html.H4(
                     children = bottom_message,
-                    className = 'shade7 mb-3'
+                    className = 'shade6 mb-3'
                 ),
                 html.Img(
-                    src = '/assets/img/not_found_404.svg',
+                    src = src,
                     height = 300
                 )
             ]),

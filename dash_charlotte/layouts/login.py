@@ -6,28 +6,38 @@ import dash_bootstrap_components as dbc
 
 
 
-class SvgImage(html.Div):
+class LoginSvgPanel(html.Div):
     """A panel containing an image.
 
     Parameters
     ----------
     src : str
         Source of the image.
-    
+    background : {'svg', one of the color classes}, default='svg'
+        Background color of the panel.
+    padding : int, default=30
+        Padding of the panel, in pixels
+
     """
 
     def __init__(
             self,
-            src: str
+            src: str,
+            background: str = 'svg',
+            padding: int = 30
         ):
 
+        if background == 'svg':
+            background = 'login-svg-background'
+
         super().__init__(
-            className = 'login-svg-image',
+            className = background,
             children = html.Img(
                 src = src,
                 style = {
                     'maxHeight': '100%',
-                    'maxWidth': '100%'
+                    'maxWidth': '100%',
+                    'padding': padding
                 }
             )
         )
@@ -49,8 +59,8 @@ class LoginForm(html.Div):
         Text display right below the title text.
     subtitle_color : str, default='shade4'
         Color class of the subtitle text.
-    email_placeholder : str, default='Username'
-        Placeholder text of the email input.
+    user_placeholder : str, default='Username'
+        Placeholder text of the user input.
     password_placeholder : str, default='Password'
         Placeholder text of the password input.
     button_text : str, default='Log in'
@@ -66,8 +76,8 @@ class LoginForm(html.Div):
         Title text element.
     {id}--subtitle
         Subtitle text element.
-    {id}--email
-        Value of the email input field.
+    {id}--user
+        Value of the user input field.
     {id}--password
         Value of the password input field.
     {id}--button
@@ -82,7 +92,7 @@ class LoginForm(html.Div):
             title_color: str = 'shade6',
             subtitle_text: str = 'Enter your username and password',
             subtitle_color: str = 'shade4',
-            email_placeholder: str = 'Username',
+            user_placeholder: str = 'Username',
             password_placeholder: str = 'Password',
             button_text: str = 'Log in',
             button_color: str = 'blue'
@@ -108,8 +118,8 @@ class LoginForm(html.Div):
                         text = subtitle_text,
                         color = subtitle_color
                     ),
-                    self.email_input(
-                        placeholder = email_placeholder
+                    self.user_input(
+                        placeholder = user_placeholder
                     ),
                     self.password_input(
                         placeholder = password_placeholder
@@ -140,7 +150,7 @@ class LoginForm(html.Div):
         )
 
 
-    def email_input(self, placeholder:str) -> html.Div:
+    def user_input(self, placeholder:str) -> html.Div:
         return html.Div(
             className = 'input-field',
             children = [
@@ -148,7 +158,7 @@ class LoginForm(html.Div):
                     className = 'fas fa-user'
                 ),
                 dcc.Input(
-                    id = f'{self.id}--email',
+                    id = f'{self.id}--user',
                     type = 'text',
                     placeholder = placeholder
                 )
@@ -166,17 +176,17 @@ class LoginForm(html.Div):
                 dcc.Input(
                     id = f'{self.id}--password',
                     type = 'password',
-                    placeholder = placeholder
+                    placeholder = placeholder,
+                    debounce = True
                 )
             ]
         )
 
 
-    def submit_button(self, text:str, color:str) -> dcc.Input:
-        return dcc.Input(
+    def submit_button(self, text:str, color:str) -> html.Button:
+        return html.Button(
+            children = text,
             id = f'{self.id}--button',
-            type = 'submit',
-            value = text,
             className = f'login-button bg-{color} bg-hover-{color}'
         )
 

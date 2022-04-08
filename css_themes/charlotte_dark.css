@@ -310,6 +310,9 @@ body {background-color: #474247}
 }
 
 .login-button {
+  display: flex;
+  text-align: center;
+  justify-content: center;
   width: 150px;
   border: none;
   outline: none;

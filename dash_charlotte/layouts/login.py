@@ -29,6 +29,8 @@ class LoginSvgPanel(html.Div):
 
         if background == 'svg':
             background = 'login-svg-background'
+        else:
+            background = f'bg-{background}'
 
         super().__init__(
             className = background,
@@ -102,7 +104,7 @@ class LoginForm(html.Div):
 
         super().__init__(
             style = {
-                'minHeight': '100%',
+                'min-height': '100%',
                 'text-align': 'left',
                 'padding': 20
             },
@@ -183,8 +185,8 @@ class LoginForm(html.Div):
         )
 
 
-    def submit_button(self, text:str, color:str) -> html.Button:
-        return html.Button(
+    def submit_button(self, text:str, color:str) -> html.Div:
+        return html.Div(
             children = text,
             id = f'{self.id}--button',
             className = f'login-button bg-{color} bg-hover-{color}'

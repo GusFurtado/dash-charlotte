@@ -24,19 +24,21 @@ def minify(file_content:str) -> str:
 
 
 
-# Names of the files located at `css_themes` folder
-CSS_FILES = [
-    'charlotte_dark',
-    'charlotte_light',
-    'dracula'
-]
+if __name__ == '__main__':
 
-for file in CSS_FILES:
+    # Names of the files located at `css_themes` folder
+    CSS_FILES = [
+        'charlotte_dark',
+        'charlotte_light',
+        'dracula'
+    ]
 
-    with open(f'css_themes/{file}.css', 'r') as r:
-        file_content = r.read()
-    
-    minified = minify(file_content)
+    for file in CSS_FILES:
 
-    with open(f'css_themes/{file}.min.css', 'w') as w:
-        w.write(minified)
+        with open(f'css_themes/{file}.css', 'r') as r:
+            file_content = r.read()
+        
+        minified = minify(file_content)
+
+        with open(f'css_themes/{file}.min.css', 'w') as w:
+            w.write(minified)

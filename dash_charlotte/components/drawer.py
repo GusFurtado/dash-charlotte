@@ -301,6 +301,7 @@ class Drawer(html.Div):
         State('drawer', 'className'),
         prevent_initial_call = True)
     def click(_, state):
-        if state == 'sidebar bg-shade0':
-            return 'sidebar bg-shade0 close'
-        return 'sidebar bg-shade0'
+        cls = 'sidebar bg-shade0'
+        if state == cls:
+            return f'{cls} close'
+        return cls

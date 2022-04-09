@@ -38,7 +38,8 @@ class NotFound404(html.Div):
                 ),
                 html.Img(
                     src = src,
-                    height = 300
+                    height = 300,
+                    style = {'max-width': '100%'}
                 )
             ]),
             style = {

@@ -70,8 +70,8 @@ class LoginForm(html.Div):
     button_color : str, default='blue'
         Color class of the submit button.
 
-    Components IDs
-    --------------
+    Component Properties
+    --------------------
     {id}
         Main content (children).
     {id}--title
@@ -210,12 +210,14 @@ class LoginPage(dbc.Container):
     id : str, optional
         Component id.
 
-    Attributes
-    ----------
-    {id}-left-panel : list of Dash components
+    Component Properties
+    --------------------
+    {id}--left-panel : list of Dash components
         Content of the left panel.
-    {id}-right-panel : list of Dash components
+    {id}--right-panel : list of Dash components
         Content of the right panel.
+    {id}--location : dash.dcc.Location
+        URL manager.
 
     """
 
@@ -231,22 +233,25 @@ class LoginPage(dbc.Container):
         id = id or str(uuid4())
 
         super().__init__(
-            children = dbc.Row([
-                dbc.Col(
-                    children = left_panel,
-                    id = f'{id}--left-panel',
-                    width = left_panel_width,
-                    style = {'min-height': '100%'}
-                ),
-                dbc.Col(
-                    children = right_panel,
-                    id = f'{id}--right-panel',
-                    width = right_panel_width,
-                    style = {'min-height': '100%'}
+            children = [
+                dcc.Location(id = f'{id}--location'),
+                dbc.Row([
+                    dbc.Col(
+                        children = left_panel,
+                        id = f'{id}--left-panel',
+                        width = left_panel_width,
+                        style = {'min-height': '100%'}
+                    ),
+                    dbc.Col(
+                        children = right_panel,
+                        id = f'{id}--right-panel',
+                        width = right_panel_width,
+                        style = {'min-height': '100%'}
+                    )
+                ],
+                    class_name = 'g-0 shadow'
                 )
             ],
-                class_name = 'g-0 shadow'
-            ),
             style = {
                 'display': 'flex',
                 'justify-content': 'center',

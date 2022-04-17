@@ -27,7 +27,7 @@ class Navbar(html.Nav):
             className = 'home-content shade7',
             children = [
                 html.I(
-                    className = 'bx bx-menu',
+                    className = 'fas fa-bars',
                     id = 'open-drawer'
                 ),
                 html.Span(

@@ -280,11 +280,13 @@ body {background-color: #474247}
   display: flex;
   align-items: center;
 }
-.home-section .home-content .bx-menu,
+.home-section .home-content .fa-bars{
+  font-size: 24px;
+}
 .home-section .home-content .text{
   font-size: 35px;
 }
-.home-section .home-content .bx-menu{
+.home-section .home-content .fa-bars{
   margin: 0 15px;
   cursor: pointer;
 }
@@ -292,9 +294,16 @@ body {background-color: #474247}
   font-size: 26px;
   font-weight: 600;
 }
-@media (max-width: 420px) {
+
+@media only screen and (max-width: 600px) {
+  .sidebar,
   .sidebar.close .nav-links li .sub-menu{
     display: none;
+  }
+  .sidebar.close ~ .home-section,
+  .home-section {
+    left: 0;
+    width: 100%;
   }
 }
 

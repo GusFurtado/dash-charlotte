@@ -13,7 +13,7 @@ setup(
     'dash_charlotte.layouts',
     'dash_charlotte.themes',
   ],
-  version = '0.2.1',
+  version = '0.2.2',
   license = 'MIT',
   description = 'A package of themes, tools and components for Plotly-Dash web dashboards.',
   long_description = long_description,
@@ -21,7 +21,7 @@ setup(
   author = 'Gustavo Furtado',
   author_email = 'gustavofurtado2@gmail.com',
   url = 'https://github.com/GusFurtado/dash-charlotte',
-  download_url = 'https://github.com/GusFurtado/dash-charlotte/archive/0.2.1.tar.gz',
+  download_url = 'https://github.com/GusFurtado/dash-charlotte/archive/0.2.2.tar.gz',
 
   keywords = [
     'dashboard',

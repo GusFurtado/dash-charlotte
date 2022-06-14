@@ -2,6 +2,7 @@ from typing import Optional
 from uuid import uuid4
 
 from dash import html
+from dash.development.base_component import Component
 
 
 
@@ -47,13 +48,13 @@ class Box(html.Div):
 
     def __init__(
             self,
-            children = None,
-            title = None,
-            subtitle = None,
+            children: Optional[Component] = None,
+            title: Optional[Component] = None,
+            subtitle: Optional[Component] = None,
             title_color: str = 'blue',
             title_style: Optional[dict] = None,
             icon: Optional[str] = None,
-            header_content = None,
+            header_content: Optional[Component] = None,
             style: Optional[dict] = None,
             padding: float = 10,
             id: Optional[str] = None

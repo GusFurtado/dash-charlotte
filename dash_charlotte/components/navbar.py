@@ -1,4 +1,4 @@
-from typing import Optional, Union
+from typing import Optional
 import uuid
 
 from dash import html
@@ -9,7 +9,7 @@ from dash.development.base_component import Component
 class Navbar(html.Nav):
     def __init__(
             self,
-            title: Union[str, Component],
+            title: Component,
             children: Optional[Component] = None,
             id: Optional[str] = None
         ):

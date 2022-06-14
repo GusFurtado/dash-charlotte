@@ -2,6 +2,7 @@ from typing import Optional
 from uuid import uuid4
 
 from dash import html
+from dash.development.base_component import Component
 
 
 
@@ -30,8 +31,8 @@ class Footer(html.Footer):
 
     def __init__(
             self,
-            left_text: Optional[str] = None,
-            right_text: Optional[str] = None,
+            left_text: Optional[Component] = None,
+            right_text: Optional[Component] = None,
             id: Optional[str] = None
         ):
 

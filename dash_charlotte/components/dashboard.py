@@ -1,5 +1,10 @@
+from typing import Optional
+
 from dash import dcc, html
+from dash.development.base_component import Component
 from dash_bootstrap_components import Container
+
+from . import Drawer, Navbar
 
 
 
@@ -30,9 +35,9 @@ class Dashboard(Container):
 
     def __init__(
             self,
-            children = None,
-            navbar = None,
-            drawer = None,
+            children: Optional[Component] = None,
+            navbar: Optional[Navbar] = None,
+            drawer: Optional[Drawer] = None,
             id: str = 'dashboard'
         ):
 

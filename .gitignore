@@ -128,9 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Dev tools
-upload_to_pypi.bat
-
 # Test files
 _rascunho.ipynb
 assets/

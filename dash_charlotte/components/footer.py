@@ -2,7 +2,6 @@ from typing import Optional
 from uuid import uuid4
 
 from dash import html
-import dash_bootstrap_components as dbc
 
 
 
@@ -40,24 +39,25 @@ class Footer(html.Footer):
 
         super().__init__(
             id = id,
-            children = dbc.Row([
-                dbc.Col(
+            children = html.Div([
+                html.Span(
                     children = left_text,
                     id = f'{id}--left',
-                    width = 'auto',
                     style = {'font-size': 14},
                     className = 'shade6'
                 ),
-                dbc.Col(
+                html.Span(
                     children = right_text,
                     id = f'{id}--right',
-                    width = 'auto',
                     style = {'font-size': 14},
                     className = 'shade6'
                 )
             ],
-                className = 'g-0 mt-4',
-                justify = 'between',
-                style = {'padding': 20}
+                style = {
+                    'display': 'flex',
+                    'justify-content': 'space-between',
+                    'margin-top': '1.5rem',
+                    'padding': '1.2rem'
+                }
             )
         )

@@ -21,7 +21,7 @@ setup(
   author = 'Gustavo Furtado',
   author_email = 'gustavofurtado2@gmail.com',
   url = 'https://github.com/GusFurtado/dash-charlotte',
-  download_url = 'https://github.com/GusFurtado/dash-charlotte/archive/0.2.2.tar.gz',
+  download_url = 'https://github.com/GusFurtado/dash-charlotte/archive/0.2.4.tar.gz',
 
   keywords = [
     'dashboard',
@@ -30,7 +30,6 @@ setup(
 
   install_requires = [
     'dash',
-    'dash-labs',
     'dash-bootstrap-components'
   ],
 

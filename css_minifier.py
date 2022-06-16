@@ -28,6 +28,7 @@ if __name__ == '__main__':
 
     # Names of the files located at `css_themes` folder
     CSS_FILES = [
+        'buttons',
         'charlotte_dark',
         'charlotte_light',
         'dracula'

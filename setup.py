@@ -13,7 +13,7 @@ setup(
     'dash_charlotte.layouts',
     'dash_charlotte.themes',
   ],
-  version = '0.2.2',
+  version = '0.2.4',
   license = 'MIT',
   description = 'A package of themes, tools and components for Plotly-Dash web dashboards.',
   long_description = long_description,

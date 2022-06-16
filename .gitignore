@@ -133,3 +133,6 @@ _rascunho.ipynb
 assets/
 pages/
 app.py
+
+# Manual upload to PyPI
+upload_to_pypi.bat

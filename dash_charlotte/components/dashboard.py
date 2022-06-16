@@ -4,8 +4,6 @@ from dash import dcc, html
 from dash.development.base_component import Component
 from dash_bootstrap_components import Container
 
-from . import Drawer, Navbar
-
 
 
 class Dashboard(Container):
@@ -36,8 +34,8 @@ class Dashboard(Container):
     def __init__(
             self,
             children: Optional[Component] = None,
-            navbar: Optional[Navbar] = None,
-            drawer: Optional[Drawer] = None,
+            navbar: Optional[Component] = None,
+            drawer: Optional[Component] = None,
             id: str = 'dashboard'
         ):
 

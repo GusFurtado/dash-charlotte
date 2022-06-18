@@ -6,7 +6,7 @@ from dash.development.base_component import Component
 
 
 class Button(html.Button):
-    """A button.
+    """A button using Marko Denic's design.
 
     Parameters
     ----------
@@ -16,6 +16,12 @@ class Button(html.Button):
         One of the types of buttons.
     color : str
         Background color.
+    **button_kwargs
+        Any argument of a `dash.html.Button` component.
+
+    References
+    ----------
+    .. [1] https://markodenic.com/tools/buttons-generator/
 
     """
 

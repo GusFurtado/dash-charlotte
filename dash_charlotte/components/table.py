@@ -226,6 +226,7 @@ class TableInputCol(TableColumn):
             input_type: Union[str, Iterable[str]] = 'text',
             input_max: Union[int, Iterable[int], None] = None,
             input_min: Union[int, Iterable[int], None] = None,
+            input_step: Union[int, Iterable[int], None] = None,
             input_size: Union[str, Iterable[str]] = 'md',
             input_debounce: Union[bool, Iterable[bool]] = False,
             **kwargs
@@ -241,6 +242,7 @@ class TableInputCol(TableColumn):
             self.expand_param(input_type, input_id),
             self.expand_param(input_max, input_id, int),
             self.expand_param(input_min, input_id, int),
+            self.expand_param(input_step, input_id, int),
             self.expand_param(input_size, input_id),
             self.expand_param(input_debounce, input_id, bool)
         )
@@ -256,10 +258,11 @@ class TableInputCol(TableColumn):
                     type = typ,
                     max = mx,
                     min = mn,
+                    step = step,
                     size = size,
                     debounce = debounce
                 )
-            ) for id, value, holder, typ, mx, mn, size, debounce in params
+            ) for id, value, holder, typ, mx, mn, step, size, debounce in params
         ]
 
     def __len__(self) -> int:
@@ -318,6 +321,22 @@ class TableTextCol(TableColumn):
 
 
 class Table(dbc.Table):
+    """A wrapper for `TableColumns`.
+
+    Parameters
+    ----------
+    columns : list[TableColumn]
+        A list of `TableColumns`.
+    header_style : dict[str,str], optional
+        The style of the header of the table.
+    body_style : dict[str,str], optional
+        The style of the doby of the table.
+    row_style : dict[str,str], optional
+        The style applied to each row of the table.
+    row_id : Iterable[str], optional
+        A list of the `ids` of each row.
+    
+    """
     
     def __init__(
             self,
@@ -325,6 +344,7 @@ class Table(dbc.Table):
             header_style: Optional[Dict[str,str]] = None,
             body_style: Optional[Dict[str,str]] = None,
             row_style: Optional[Dict[str,str]] = None,
+            row_id: Optional[Iterable[str]] = None,
             **kwargs
         ):
 
@@ -332,48 +352,61 @@ class Table(dbc.Table):
 
         super().__init__(
             children = [
-                self.thead(
+                self._thead(
                     header_style = header_style or {},
                 ),
-                self.tbody(
+                self._tbody(
                     body_style = body_style or {},
-                    row_style = row_style or {}
+                    row_style = row_style or {},
+                    row_id = row_id
                 )
             ],
             **kwargs
         )
 
 
-    def thead(self, header_style:Dict[str,str]) -> html.Thead:
+    def _thead(self, header_style:Dict[str,str]) -> html.Thead:
         return html.Thead(
             style = header_style,
             children = [col.th for col in self.columns]
         )
 
 
-    def tr(self, index:int, style:Dict[str,str]) -> html.Tr:
+    def _tr(self, index:int, id:str, style:Dict[str,str]) -> html.Tr:
         return html.Tr(
-            style = style,
-            children = [col.td[index] for col in self.columns]
+            children = [col.td[index] for col in self.columns],
+            id = id,
+            style = style
         )
 
 
-    def tbody(
+    def _tbody(
             self,
             body_style: Dict[str,str],
-            row_style: Dict[str,str]   
+            row_style: Dict[str,str],
+            row_id: Iterable
         ) -> html.Tbody:
 
+        # Checking lenght of columns
         col_lenghts = [len(col) for col in self.columns]
         if len(set(col_lenghts)) > 1:
             raise CharlotteTableError("Lenghts of columns don't match.")
 
+        # Checking row ids
+        if row_id is None:
+            row_id = [str(uuid4()) for _ in range(col_lenghts[0])]
+        else:
+            if len(row_id) != col_lenghts[0]:
+                raise CharlotteTableError("Lenght of `row_id` doesn't match the columns lenghts.")
+
+        # Creating a `html.Tr` for each id
         return html.Tbody(
             style = body_style,
             children = [
-                self.tr(
+                self._tr(
                     index = i,
+                    id = id,
                     style = row_style    
-                ) for i in range(col_lenghts[0])
+                ) for i, id in enumerate(row_id)
             ]
         )

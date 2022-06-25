@@ -42,11 +42,6 @@ class TableColumn:
     th : dash.html.Th
         HTML Header of the column.
 
-    Methods
-    -------
-    expand_param(param, reference, param_type=str)
-        Convert a single value into a list.
-
     """
 
     header: str
@@ -61,15 +56,14 @@ class TableColumn:
             style = self.header_style or {}
         )
 
-    def expand_param(
+    def _expand_param(
             self,
             param,
-            reference: Iterable,
-            param_type = str
+            reference: Iterable
         ) -> Iterable:
         """Convert a single value into a list.
 
-        Ignore if the value is already a list.
+        Ignore if the value is already an iterable.
 
         Parameters
         ----------
@@ -78,12 +72,10 @@ class TableColumn:
         reference : Iterable
             Reference column.
             Necessary to know how many columns there are in the table.
-        param_type : Type, default=str
-            Type of the value.
         
         """
 
-        if (param is None) or isinstance(param, param_type):
+        if not hasattr(param, '__iter__') or isinstance(param, str):
             param = [param for _ in reference]
         return param
 
@@ -106,10 +98,10 @@ class TableButtonCol(TableColumn):
 
         params = zip(
             button_id,
-            self.expand_param(button_text, button_id),
-            self.expand_param(button_icon, button_id),
-            self.expand_param(button_size, button_id),
-            self.expand_param(button_color, button_id)
+            self._expand_param(button_text, button_id),
+            self._expand_param(button_icon, button_id),
+            self._expand_param(button_size, button_id),
+            self._expand_param(button_color, button_id)
         )
 
         self.td = [
@@ -149,9 +141,9 @@ class TableCheckBoxCol(TableColumn):
 
         params = zip(
             checkbox_id,
-            self.expand_param(checkbox_value, checkbox_id, bool),
-            self.expand_param(checkbox_label, checkbox_id),
-            self.expand_param(checkbox_disabled, checkbox_id, bool)
+            self._expand_param(checkbox_value, checkbox_id),
+            self._expand_param(checkbox_label, checkbox_id),
+            self._expand_param(checkbox_disabled, checkbox_id)
         )
 
         self.td = [
@@ -190,10 +182,10 @@ class TableDropdownCol(TableColumn):
 
         params = zip(
             dropdown_id,
-            self.expand_param(dropdown_value, dropdown_id),
-            self.expand_param(dropdown_clearable, dropdown_id, bool),
-            self.expand_param(dropdown_placeholder, dropdown_id),
-            self.expand_param(dropdown_multi, dropdown_id, bool),
+            self._expand_param(dropdown_value, dropdown_id),
+            self._expand_param(dropdown_clearable, dropdown_id),
+            self._expand_param(dropdown_placeholder, dropdown_id),
+            self._expand_param(dropdown_multi, dropdown_id),
         )
 
         self.td = [
@@ -237,14 +229,14 @@ class TableInputCol(TableColumn):
 
         params = zip(
             input_id,
-            self.expand_param(input_value, input_id),
-            self.expand_param(input_placeholder, input_id),
-            self.expand_param(input_type, input_id),
-            self.expand_param(input_max, input_id, int),
-            self.expand_param(input_min, input_id, int),
-            self.expand_param(input_step, input_id, int),
-            self.expand_param(input_size, input_id),
-            self.expand_param(input_debounce, input_id, bool)
+            self._expand_param(input_value, input_id),
+            self._expand_param(input_placeholder, input_id),
+            self._expand_param(input_type, input_id),
+            self._expand_param(input_max, input_id),
+            self._expand_param(input_min, input_id),
+            self._expand_param(input_step, input_id),
+            self._expand_param(input_size, input_id),
+            self._expand_param(input_debounce, input_id)
         )
 
         self.td = [

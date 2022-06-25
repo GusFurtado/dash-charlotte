@@ -56,6 +56,27 @@ class TableColumn:
             style = self.header_style or {}
         )
 
+
+    def _break_kwargs(self, kwargs:dict) -> List[dict]:
+
+        for kwarg in kwargs:
+            kwargs[kwarg] = self._expand_param(kwargs[kwarg], self.id)
+
+        list_of_kwargs = []
+        for i, _ in enumerate(self.id):
+            list_of_kwargs.append(
+                {kwarg: kwargs[kwarg][i] for kwarg in kwargs}
+            )
+
+        return list_of_kwargs
+
+
+    def _check_id(self, id:Iterable) -> Iterable:
+        if not hasattr(id, '__iter__') or isinstance(id, str):
+            raise CharlotteTableError('`id` must be an iterable object.')
+        return id
+
+
     def _expand_param(
             self,
             param,
@@ -212,31 +233,24 @@ class TableInputCol(TableColumn):
 
     def __init__(
             self,
-            input_id: Optional[Iterable[str]],
-            input_value: Union[str, Iterable[str], None] = None,
-            input_placeholder: Union[str, Iterable[str], None] = None,
-            input_type: Union[str, Iterable[str]] = 'text',
-            input_max: Union[int, Iterable[int], None] = None,
-            input_min: Union[int, Iterable[int], None] = None,
-            input_step: Union[int, Iterable[int], None] = None,
-            input_size: Union[str, Iterable[str]] = 'md',
-            input_debounce: Union[bool, Iterable[bool]] = False,
-            **kwargs
+            id: Iterable[str],
+            header: str,
+            header_style: Optional[Dict[str,str]] = None,
+            cell_id: Optional[Iterable] = None,
+            cell_style: Optional[Dict[str,str]] = None,
+            cell_class: Optional[str] = None,
+            **input_kwargs
         ):
 
-        super().__init__(**kwargs)
-        self.input_id = input_id
-
-        params = zip(
-            input_id,
-            self._expand_param(input_value, input_id),
-            self._expand_param(input_placeholder, input_id),
-            self._expand_param(input_type, input_id),
-            self._expand_param(input_max, input_id),
-            self._expand_param(input_min, input_id),
-            self._expand_param(input_step, input_id),
-            self._expand_param(input_size, input_id),
-            self._expand_param(input_debounce, input_id)
+        self.id = self._check_id(id)
+        list_of_kwargs = self._break_kwargs(input_kwargs)
+        
+        super().__init__(
+            header = header,
+            header_style = header_style,
+            cell_id = cell_id,
+            cell_style = cell_style,
+            cell_class = cell_class,
         )
 
         self.td = [
@@ -244,21 +258,14 @@ class TableInputCol(TableColumn):
                 style = self.cell_style,
                 className = self.cell_class,
                 children = dbc.Input(
-                    value = value,
-                    placeholder = holder,
-                    id = id,
-                    type = typ,
-                    max = mx,
-                    min = mn,
-                    step = step,
-                    size = size,
-                    debounce = debounce
+                    id = i,
+                    **kwargs
                 )
-            ) for id, value, holder, typ, mx, mn, step, size, debounce in params
+            ) for kwargs, i in zip(list_of_kwargs, id)
         ]
 
     def __len__(self) -> int:
-        return len(self.input_id)
+        return len(self.id)
 
 
 

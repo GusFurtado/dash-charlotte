@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from typing import (
     Callable,
     Dict,
@@ -20,7 +19,6 @@ class CharlotteTableError(ValueError):
 
 
 
-@dataclass
 class TableColumn:
     """Table Column Base Class.
 
@@ -44,23 +42,38 @@ class TableColumn:
 
     """
 
-    header: str
-    header_style: Optional[Dict[str,str]] = None
-    cell_id: Optional[Iterable] = None
-    cell_style: Optional[Dict[str,str]] = None
-    cell_class: Optional[str] = None
+    def __init__(
+            self,
+            id: Iterable[str],
+            header: str,
+            header_style: Optional[Dict[str,str]] = None
+        ):
 
-    def __post_init__(self):
+        # Check if `id` is a not-string iterable
+        if not hasattr(id, '__iter__') or isinstance(id, str):
+            raise CharlotteTableError('`id` must be an iterable object.')
+        self.id = id
+
         self.th = html.Th(
-            children = self.header,
-            style = self.header_style or {}
+            children = header,
+            style = header_style or {}
         )
 
 
     def _break_kwargs(self, kwargs:dict) -> List[dict]:
 
+        # The Dropdown Options Exception
+        if 'options' in kwargs:
+            if isinstance(kwargs['options'][0], dict):
+                kwargs['options'] = [kwargs['options'] for _ in self.id]
+
+        # The Style Exception
+        if 'style' in kwargs:
+            if isinstance(kwargs['style'], dict):
+                kwargs['style'] = [kwargs['style'] for _ in self.id]
+
         for kwarg in kwargs:
-            kwargs[kwarg] = self._expand_param(kwargs[kwarg], self.id)
+            kwargs[kwarg] = self._expand_param(kwargs[kwarg])
 
         list_of_kwargs = []
         for i, _ in enumerate(self.id):
@@ -71,17 +84,7 @@ class TableColumn:
         return list_of_kwargs
 
 
-    def _check_id(self, id:Iterable) -> Iterable:
-        if not hasattr(id, '__iter__') or isinstance(id, str):
-            raise CharlotteTableError('`id` must be an iterable object.')
-        return id
-
-
-    def _expand_param(
-            self,
-            param,
-            reference: Iterable
-        ) -> Iterable:
+    def _expand_param(self, param) -> Iterable:
         """Convert a single value into a list.
 
         Ignore if the value is already an iterable.
@@ -90,14 +93,11 @@ class TableColumn:
         ----------
         param : Any
             Value to be converted.
-        reference : Iterable
-            Reference column.
-            Necessary to know how many columns there are in the table.
         
         """
 
         if not hasattr(param, '__iter__') or isinstance(param, str):
-            param = [param for _ in reference]
+            param = [param for _ in self.id]
         return param
 
         
@@ -106,43 +106,50 @@ class TableButtonCol(TableColumn):
 
     def __init__(
             self,
-            button_id: Optional[Iterable[str]],
-            button_text: Union[str, Iterable[str], None] = None,
-            button_icon: Union[str, Iterable[str], None] = None,
-            button_size: Union[str, Iterable[str]] = 'sm',
-            button_color: Union[str, Iterable[str]] = 'primary',
-            **kwargs
+            id: Iterable[str],
+            header: str,
+            header_style: Optional[Dict[str,str]] = None,
+            cell_id: Optional[Iterable] = None,
+            cell_style: Optional[Dict[str,str]] = None,
+            cell_class: Optional[str] = None,
+            text: Union[str, Iterable[str], None] = None,
+            icon: Union[str, Iterable[str], None] = None,
+            **button_kwargs
         ):
 
-        super().__init__(**kwargs)
-        self.button_id = button_id
+        super().__init__(
+            id = id,
+            header = header,
+            header_style = header_style
+        )
 
-        params = zip(
-            button_id,
-            self._expand_param(button_text, button_id),
-            self._expand_param(button_icon, button_id),
-            self._expand_param(button_size, button_id),
-            self._expand_param(button_color, button_id)
+        z = zip(
+            self.id,
+            self._expand_param(cell_id),
+            self._break_kwargs(button_kwargs),
+            self._expand_param(text),
+            self._expand_param(icon)
         )
 
         self.td = [
             html.Td(
-                style = self.cell_style,
-                className = self.cell_class,
+                style = cell_style or {},
+                className = cell_class,
+                id = i_cell or str(uuid4()),
                 children = dbc.Button(
-                    size = size,
-                    color = color,
-                    id = id,
+                    id = i_id,
                     children = [
-                        icon and html.I(className=f'{icon} me-2'),
-                        text and html.Span(children=text)
-                    ]
+                        i_icon and html.I(className=f'{i_icon} me-2'),
+                        i_text and html.Span(children=i_text)
+                    ],
+                    **kwargs
                 )
-            ) for id, text, icon, size, color in params
+            ) for i_id, i_cell, kwargs, i_text, i_icon in z
         ]
 
+
     def __len__(self) -> int:
-        return len(self.button_id)
+        return len(self.id)
 
 
 
@@ -150,38 +157,43 @@ class TableCheckBoxCol(TableColumn):
 
     def __init__(
             self,
-            checkbox_id: Optional[Iterable[str]],
-            checkbox_value: Union[str, Iterable[bool]] = False,
-            checkbox_label: Union[str, Iterable[bool], None] = None,
-            checkbox_disabled: Union[bool, Iterable[bool]] = False,
-            **kwargs
+            id: Iterable[str],
+            header: str,
+            header_style: Optional[Dict[str,str]] = None,
+            cell_id: Optional[Iterable] = None,
+            cell_style: Optional[Dict[str,str]] = None,
+            cell_class: Optional[str] = None,
+            **checkbox_kwargs
         ):
 
-        super().__init__(**kwargs)
-        self.checkbox_id = checkbox_id
+        super().__init__(
+            id = id,
+            header = header,
+            header_style = header_style
+        )
 
-        params = zip(
-            checkbox_id,
-            self._expand_param(checkbox_value, checkbox_id),
-            self._expand_param(checkbox_label, checkbox_id),
-            self._expand_param(checkbox_disabled, checkbox_id)
+        z = zip(
+            self.id,
+            self._expand_param(cell_id),
+            self._break_kwargs(checkbox_kwargs)
         )
 
         self.td = [
             html.Td(
-                style = self.cell_style,
-                className = self.cell_class,
+                style = cell_style or {},
+                className = cell_class,
+                id = i_cell or str(uuid4()),
                 children = dbc.Checkbox(
-                    value = value,
-                    label = label,
-                    disabled = disabled,
-                    id = id
+                    id = i_id,
+                    **kwargs
                 )
-            ) for id, value, label, disabled in params
+            ) for i_id, i_cell, kwargs in z
         ]
 
+
+
     def __len__(self) -> int:
-        return len(self.checkbox_id)
+        return len(self.id)
 
 
 
@@ -189,43 +201,42 @@ class TableDropdownCol(TableColumn):
 
     def __init__(
             self,
-            dropdown_id: Optional[Iterable[str]],
-            dropdown_value: Union[str, Iterable[str], None] = None,
-            dropdown_options: Optional[List[Dict[str,str]]] = None,
-            dropdown_clearable: Union[bool, Iterable[bool]] = False,
-            dropdown_placeholder: Union[str, Iterable[str], None] = None,
-            dropdown_multi: Union[bool, Iterable[bool]] = False,
-            **kwargs
+            id: Iterable[str],
+            header: str,
+            header_style: Optional[Dict[str,str]] = None,
+            cell_id: Optional[Iterable] = None,
+            cell_style: Optional[Dict[str,str]] = None,
+            cell_class: Optional[str] = None,
+            **dropdown_kwargs
         ):
 
-        super().__init__(**kwargs)
-        self.dropdown_id = dropdown_id
+        super().__init__(
+            id = id,
+            header = header,
+            header_style = header_style
+        )
 
-        params = zip(
-            dropdown_id,
-            self._expand_param(dropdown_value, dropdown_id),
-            self._expand_param(dropdown_clearable, dropdown_id),
-            self._expand_param(dropdown_placeholder, dropdown_id),
-            self._expand_param(dropdown_multi, dropdown_id),
+        z = zip(
+            self.id,
+            self._expand_param(cell_id),
+            self._break_kwargs(dropdown_kwargs),
         )
 
         self.td = [
             html.Td(
-                style = self.cell_style,
-                className = self.cell_class,
+                style = cell_style or {},
+                className = cell_class,
+                id = i_cell or str(uuid4()),
                 children = dcc.Dropdown(
-                    value = value,
-                    clearable = clear,
-                    placeholder = holder,
-                    id = id,
-                    options = dropdown_options,
-                    multi = multi
+                    id = i_id,
+                    **kwargs
                 )
-            ) for id, value, clear, holder, multi in params
+            ) for i_id, i_cell, kwargs in z
         ]
 
+
     def __len__(self) -> int:
-        return len(self.dropdown_id)
+        return len(self.id)
 
 
 
@@ -242,27 +253,30 @@ class TableInputCol(TableColumn):
             **input_kwargs
         ):
 
-        self.id = self._check_id(id)
-        list_of_kwargs = self._break_kwargs(input_kwargs)
-        
         super().__init__(
+            id = id,
             header = header,
-            header_style = header_style,
-            cell_id = cell_id,
-            cell_style = cell_style,
-            cell_class = cell_class,
+            header_style = header_style
+        )
+
+        z = zip(
+            self.id,
+            self._expand_param(cell_id),
+            self._break_kwargs(input_kwargs)
         )
 
         self.td = [
             html.Td(
-                style = self.cell_style,
-                className = self.cell_class,
+                style = cell_style or {},
+                className = cell_class,
+                id = i_cell or str(uuid4()),
                 children = dbc.Input(
-                    id = i,
+                    id = i_id,
                     **kwargs
                 )
-            ) for kwargs, i in zip(list_of_kwargs, id)
+            ) for i_id, i_cell, kwargs in z
         ]
+
 
     def __len__(self) -> int:
         return len(self.id)
@@ -288,34 +302,48 @@ class TableTextCol(TableColumn):
 
     def __init__(
             self,
-            text: Iterable,
+            id: Iterable[str],
+            header: str,
+            header_style: Optional[Dict[str,str]] = None,
             text_formatting: Optional[Callable] = None,
-            **kwargs
+            cell_id: Optional[Iterable] = None,
+            cell_style: Optional[Dict[str,str]] = None,
+            cell_class: Optional[str] = None,
+            text: Union[Iterable, str, None] = None,
+            **span_kwargs
         ):
 
-        super().__init__(**kwargs)
-        self.text = text
         fmt = text_formatting or '{}'.format
 
-        if self.cell_id is None:
-            self.cell_id = [str(uuid4()) for _ in text]
+        super().__init__(
+            id = id,
+            header = header,
+            header_style = header_style
+        )
 
-        params = zip(
-            text,
-            self.cell_id
+        z = zip(
+            self.id,
+            self._expand_param(cell_id),
+            self._break_kwargs(span_kwargs),
+            self._expand_param(text),
         )
 
         self.td = [
             html.Td(
-                style = self.cell_style or {},
-                className = self.cell_class,
-                children = fmt(txt),
-                id = id
-            ) for txt, id in params
+                style = cell_style or {},
+                className = cell_class,
+                id = i_cell or str(uuid4()),
+                children = html.Span(
+                    children = fmt(i_text),
+                    id = i_id,
+                    **kwargs
+                )
+            ) for i_id, i_cell, kwargs, i_text in z
         ]
-        
+
+
     def __len__(self) -> int:
-        return len(self.text)
+        return len(self.id)
 
 
 

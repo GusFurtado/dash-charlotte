@@ -28,6 +28,8 @@ class TableColumn:
         A list of the ids of each cell.
     header : str
         Column name.
+    **header_kwargs
+        Every other argument of a `html.Th` component.
 
     Attributes
     ----------
@@ -40,7 +42,7 @@ class TableColumn:
             self,
             id: Iterable[str],
             header: str,
-            **kwargs
+            **header_kwargs
         ):
 
         # Check if `id` is a not-string iterable
@@ -52,7 +54,7 @@ class TableColumn:
 
         self.th = html.Th(
             children = header,
-            **kwargs
+            **header_kwargs
         )
 
 
@@ -164,10 +166,53 @@ class TableColumn:
         
 
 class TableButtonCol(TableColumn):
+    """A columns of buttons for the `Table` component.
+
+    Parameters
+    ----------
+    id : Iterable[str, dict]
+        A series of ids for each button.
+    header : str
+        Name of the column.
+    text : str, Iterable[str], optional
+        The text of a series of text for each button.
+    icon : str, Iterable[str], optional
+        An icon reference of a series of icons for each button.
+    cell_id : Iterable, optional
+        A series of ids for each table cell.
+    loading : bool, default=False
+        Activate a loading wrapper in the buttons.
+
+    Kwargs
+    ------
+    Pass every other subcomponent argument through kwargs using an underscore
+    joining the component type and the argument name.
+
+    e.g.: `loading_type`, `header_className`, `cell_style`
+
+    These are the available subcomponents of these `TableColumn`
+    - `button_{kwarg}`
+    - `cell_{kwarg}`
+    - `header_{kwarg}`
+    - `loading_{kwarg}`
+    
+    Example
+    -------
+    >>> col = TableButtonCol(
+    ...     id = ['id_1', 'id_2', 'id_n'],
+    ...     header = 'Button Column,
+    ...     text = 'Default Text',
+    ...     icon = 'fas fa-exclamation-triangle',
+    ...     header_style = {'background-color': 'cyan'},
+    ...     button_size = 'sm',
+    ...     cell_className = 'bg-shade1'
+    ... )
+
+    """
 
     def __init__(
             self,
-            id: Iterable[str],
+            id: Iterable[str, dict],
             header: str,
             text: Union[str, Iterable[str], None] = None,
             icon: Union[str, Iterable[str], None] = None,
@@ -217,6 +262,43 @@ class TableButtonCol(TableColumn):
 
 
 class TableCheckBoxCol(TableColumn):
+    """A columns of checkboxes for the `Table` component.
+
+    Parameters
+    ----------
+    id : Iterable[str, dict]
+        A series of ids for each button.
+    header : str
+        Name of the column.
+    cell_id : Iterable, optional
+        A series of ids for each table cell.
+    loading : bool, default=False
+        Activate a loading wrapper in the buttons.
+
+    Kwargs
+    ------
+    Pass every other subcomponent argument through kwargs using an underscore
+    joining the component type and the argument name.
+
+    e.g.: `loading_type`, `header_className`, `cell_style`
+
+    These are the available subcomponents of these `TableColumn`
+    - `checkbox_{kwarg}`
+    - `cell_{kwarg}`
+    - `header_{kwarg}`
+    - `loading_{kwarg}`
+    
+    Example
+    -------
+    >>> col = TableCheckBoxCol(
+    ...     id = ['id_1', 'id_2', 'id_n'],
+    ...     header = 'Button Column,
+    ...     header_style = {'background-color': 'cyan'},
+    ...     cell_className = 'bg-shade1',
+    ...     checkbox_value = [False, True, False]
+    ... )
+
+    """
 
     def __init__(
             self,
@@ -262,6 +344,48 @@ class TableCheckBoxCol(TableColumn):
 
 
 class TableDropdownCol(TableColumn):
+    """A columns of dropdown lists for the `Table` component.
+
+    Parameters
+    ----------
+    id : Iterable[str, dict]
+        A series of ids for each button.
+    header : str
+        Name of the column.
+    cell_id : Iterable, optional
+        A series of ids for each table cell.
+    loading : bool, default=False
+        Activate a loading wrapper in the buttons.
+
+    Kwargs
+    ------
+    Pass every other subcomponent argument through kwargs using an underscore
+    joining the component type and the argument name.
+
+    e.g.: `loading_type`, `header_className`, `cell_style`
+
+    These are the available subcomponents of these `TableColumn`
+    - `dropdown_{kwarg}`
+    - `cell_{kwarg}`
+    - `header_{kwarg}`
+    - `loading_{kwarg}`
+    
+    Example
+    -------
+    >>> col = TableDropdownCol(
+    ...     id = ['id_1', 'id_2', 'id_n'],
+    ...     header = 'Button Column,
+    ...     header_style = {'background-color': 'cyan'},
+    ...     cell_className = 'bg-shade1',
+    ...     dropdown_value = [True, False, True],
+    ...     dropdown_options = [
+    ...         {'label': 'Yes', 'value': True},
+    ...         {'label': 'No', 'value': False}
+    ...     ],
+    ...     dropdown_clearable = False
+    ... )
+
+    """
 
     def __init__(
             self,
@@ -307,6 +431,47 @@ class TableDropdownCol(TableColumn):
 
 
 class TableInputCol(TableColumn):
+    """A columns of input fields for the `Table` component.
+
+    Parameters
+    ----------
+    id : Iterable[str, dict]
+        A series of ids for each button.
+    header : str
+        Name of the column.
+    cell_id : Iterable, optional
+        A series of ids for each table cell.
+    loading : bool, default=False
+        Activate a loading wrapper in the buttons.
+
+    Kwargs
+    ------
+    Pass every other subcomponent argument through kwargs using an underscore
+    joining the component type and the argument name.
+
+    e.g.: `loading_type`, `header_className`, `cell_style`
+
+    These are the available subcomponents of these `TableColumn`
+    - `input_{kwarg}`
+    - `cell_{kwarg}`
+    - `header_{kwarg}`
+    - `loading_{kwarg}`
+    
+    Example
+    -------
+    >>> col = TableDropdownCol(
+    ...     id = ['id_1', 'id_2', 'id_n'],
+    ...     header = 'Button Column,
+    ...     header_style = {'background-color': 'cyan'},
+    ...     cell_className = 'bg-shade1',
+    ...     input_type = 'number',
+    ...     input_min = 0,
+    ...     input_max = 9,
+    ...     input_step = 1,
+    ...     input_value = [2,3,4]
+    ... )
+
+    """
 
     def __init__(
             self,
@@ -353,19 +518,47 @@ class TableInputCol(TableColumn):
 
 
 class TableTextCol(TableColumn):
-    """Default Text Column.
-    
+    """A columns of text for the `Table` component.
+
     Parameters
     ----------
-    text : Iterable
-        Text inside the cell before formatting.
-    text_formatting : Callable, optional
-        Format function to be applied to the children.
+    id : Iterable[str, dict]
+        A series of ids for each button.
+    header : str
+        Name of the column.
+    text : str | Iterable[str], optional
+        Text or series of text to be shown in each cell.
+    text_format : Callable, optional
+        Text format function.
+    cell_id : Iterable, optional
+        A series of ids for each table cell.
+    loading : bool, default=False
+        Activate a loading wrapper in the buttons.
 
-    Attributes
-    ----------
-    td : list[dash.html.Td]
-        List of HTML table data.
+    Kwargs
+    ------
+    Pass every other subcomponent argument through kwargs using an underscore
+    joining the component type and the argument name.
+
+    e.g.: `loading_type`, `header_className`, `cell_style`
+
+    These are the available subcomponents of these `TableColumn`
+    - `text_{kwarg}`
+    - `cell_{kwarg}`
+    - `header_{kwarg}`
+    - `loading_{kwarg}`
+    
+    Example
+    -------
+    >>> col = TableDropdownCol(
+    ...     id = ['id_1', 'id_2', 'id_n'],
+    ...     header = 'Button Column,
+    ...     header_style = {'background-color': 'cyan'},
+    ...     text = [1111.11, 2222.22, 3333.33],
+    ...     text_format = '{:.2%}'.format,
+    ...     text_className = 'red',
+    ...     cell_className = 'bg-shade1'
+    ... )
 
     """
 
@@ -373,14 +566,14 @@ class TableTextCol(TableColumn):
             self,
             id: Iterable[str],
             header: str,
-            text_formatting: Optional[Callable] = None,
-            cell_id: Optional[Iterable] = None,
             text: Union[Iterable, str, None] = None,
+            text_format: Optional[Callable] = None,
+            cell_id: Optional[Iterable] = None,
             loading: bool = False,
             **kwargs
         ):
 
-        fmt = text_formatting or '{}'.format
+        fmt = text_format or '{}'.format
 
         text_kwargs = self._filter_kwargs(kwargs, 'text')
         cell_kwargs = self._filter_kwargs(kwargs, 'cell')
@@ -433,6 +626,8 @@ class Table(dbc.Table):
         The style applied to each row of the table.
     row_id : Iterable[str], optional
         A list of the `ids` of each row.
+    **table_kwargs
+        Every other argument of a `dbc.Table`
     
     """
     
@@ -443,7 +638,7 @@ class Table(dbc.Table):
             body_style: Optional[Dict[str,str]] = None,
             row_style: Optional[Dict[str,str]] = None,
             row_id: Optional[Iterable[str]] = None,
-            **kwargs
+            **table_kwargs
         ):
 
         self.columns = columns
@@ -459,7 +654,7 @@ class Table(dbc.Table):
                     row_id = row_id
                 )
             ],
-            **kwargs
+            **table_kwargs
         )
 
 

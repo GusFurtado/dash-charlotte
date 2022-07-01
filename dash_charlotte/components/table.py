@@ -24,16 +24,10 @@ class TableColumn:
 
     Parameters
     ----------
+    id : Iterable[str]
+        A list of the ids of each cell.
     header : str
         Column name.
-    header_style : dict[str,str], optional
-        Style of the header of the column.
-    cell_id : Iterable, optional
-        IDs of the cells.
-    cell_style : dict[str,str], optional
-        Dictionary of CSS to be applied to every cell.
-    cell_class : str, optional
-        Class name of the cell.
 
     Attributes
     ----------
@@ -46,7 +40,7 @@ class TableColumn:
             self,
             id: Iterable[str],
             header: str,
-            header_style: Optional[Dict[str,str]] = None
+            **kwargs
         ):
 
         # Check if `id` is a not-string iterable
@@ -54,10 +48,24 @@ class TableColumn:
             raise CharlotteTableError('`id` must be an iterable object.')
         self.id = id
 
+        self.header = header 
+
         self.th = html.Th(
             children = header,
-            style = header_style or {}
+            **kwargs
         )
+
+
+    def __len__(self) -> int:
+        return len(self.id)
+
+
+    def __repr__(self) -> str:
+        return f"<Charlotte Table Column: '{self.header}'>"
+
+
+    def __str__(self) -> str:
+        return f'Charlotte Table Column {self.header}'
 
 
     def _break_kwargs(self, kwargs:dict) -> List[dict]:
@@ -100,6 +108,59 @@ class TableColumn:
             param = [param for _ in self.id]
         return param
 
+
+    def _filter_kwargs(self, kwargs:dict, component_type:str) -> dict:
+        """Filter the original kwargs.
+
+        Convert the original kwargs of the column component into a smaller set
+        of one subcomponent kwargs.
+
+        Parameters
+        ----------
+        kwargs : dict
+            The original kwargs of the table.
+        component_type : {'header', 'cell', 'loading', ...}
+            Prefix of the desired subcomponent kwargs.
+        
+        Returns
+        -------
+        dict
+            Subset of the original kwargs dict.
+
+        """
+
+        return {key[len(component_type)+1:]: kwargs[key] \
+            for key in kwargs if key.startswith(f'{component_type}_')}
+
+
+    def _loading_wrapper(
+            self,
+            dash_component,
+            loading: bool,
+            **loading_kwargs
+        ):
+        """Wraps a dash component in a `dcc.Loading` component.
+
+        Ignore if `loading=False`.
+
+        Parameters
+        ----------
+        dash_component
+            The component to be wrapped.
+        loading : bool
+            Activate or not the `Loading` wrapper.
+        **loading_kwargs
+            All the arguments of a `dcc.Loading` component.
+        
+        """
+
+        if not loading:
+            return dash_component
+        return dcc.Loading(
+            children = dash_component,
+            **loading_kwargs
+        )
+
         
 
 class TableButtonCol(TableColumn):
@@ -108,19 +169,22 @@ class TableButtonCol(TableColumn):
             self,
             id: Iterable[str],
             header: str,
-            header_style: Optional[Dict[str,str]] = None,
-            cell_id: Optional[Iterable] = None,
-            cell_style: Optional[Dict[str,str]] = None,
-            cell_class: Optional[str] = None,
             text: Union[str, Iterable[str], None] = None,
             icon: Union[str, Iterable[str], None] = None,
-            **button_kwargs
+            cell_id: Optional[Iterable] = None,
+            loading: bool = False,
+            **kwargs
         ):
+
+        button_kwargs = self._filter_kwargs(kwargs, 'button')
+        cell_kwargs = self._filter_kwargs(kwargs, 'cell')
+        header_kwargs = self._filter_kwargs(kwargs, 'header')
+        loading_kwargs = self._filter_kwargs(kwargs, 'loading')
 
         super().__init__(
             id = id,
             header = header,
-            header_style = header_style
+            **header_kwargs
         )
 
         z = zip(
@@ -133,23 +197,22 @@ class TableButtonCol(TableColumn):
 
         self.td = [
             html.Td(
-                style = cell_style or {},
-                className = cell_class,
                 id = i_cell or str(uuid4()),
-                children = dbc.Button(
-                    id = i_id,
-                    children = [
-                        i_icon and html.I(className=f'{i_icon} me-2'),
-                        i_text and html.Span(children=i_text)
-                    ],
-                    **kwargs
-                )
-            ) for i_id, i_cell, kwargs, i_text, i_icon in z
+                children = self._loading_wrapper(
+                    loading = loading,
+                    dash_component = dbc.Button(
+                        id = i_id,
+                        children = [
+                            i_icon and html.I(className=f'{i_icon} me-2'),
+                            i_text and html.Span(children=i_text)
+                        ],
+                        **b_kwargs
+                    ),
+                    **loading_kwargs
+                ),
+                **cell_kwargs
+            ) for i_id, i_cell, b_kwargs, i_text, i_icon in z
         ]
-
-
-    def __len__(self) -> int:
-        return len(self.id)
 
 
 
@@ -159,17 +222,20 @@ class TableCheckBoxCol(TableColumn):
             self,
             id: Iterable[str],
             header: str,
-            header_style: Optional[Dict[str,str]] = None,
             cell_id: Optional[Iterable] = None,
-            cell_style: Optional[Dict[str,str]] = None,
-            cell_class: Optional[str] = None,
-            **checkbox_kwargs
+            loading: bool = False,
+            **kwargs
         ):
+
+        checkbox_kwargs = self._filter_kwargs(kwargs, 'checkbox')
+        cell_kwargs = self._filter_kwargs(kwargs, 'cell')
+        header_kwargs = self._filter_kwargs(kwargs, 'header')
+        loading_kwargs = self._filter_kwargs(kwargs, 'loading')
 
         super().__init__(
             id = id,
             header = header,
-            header_style = header_style
+            **header_kwargs
         )
 
         z = zip(
@@ -180,20 +246,18 @@ class TableCheckBoxCol(TableColumn):
 
         self.td = [
             html.Td(
-                style = cell_style or {},
-                className = cell_class,
                 id = i_cell or str(uuid4()),
-                children = dbc.Checkbox(
-                    id = i_id,
-                    **kwargs
-                )
-            ) for i_id, i_cell, kwargs in z
+                children = self._loading_wrapper(
+                    loading = loading,
+                    dash_component = dbc.Checkbox(
+                        id = i_id,
+                        **c_kwargs
+                    ),
+                    **loading_kwargs
+                ),
+                **cell_kwargs
+            ) for i_id, i_cell, c_kwargs in z
         ]
-
-
-
-    def __len__(self) -> int:
-        return len(self.id)
 
 
 
@@ -203,17 +267,20 @@ class TableDropdownCol(TableColumn):
             self,
             id: Iterable[str],
             header: str,
-            header_style: Optional[Dict[str,str]] = None,
             cell_id: Optional[Iterable] = None,
-            cell_style: Optional[Dict[str,str]] = None,
-            cell_class: Optional[str] = None,
-            **dropdown_kwargs
+            loading: bool = False,
+            **kwargs
         ):
+
+        dropdown_kwargs = self._filter_kwargs(kwargs, 'dropdown')
+        cell_kwargs = self._filter_kwargs(kwargs, 'cell')
+        header_kwargs = self._filter_kwargs(kwargs, 'header')
+        loading_kwargs = self._filter_kwargs(kwargs, 'loading')
 
         super().__init__(
             id = id,
             header = header,
-            header_style = header_style
+            **header_kwargs
         )
 
         z = zip(
@@ -224,19 +291,18 @@ class TableDropdownCol(TableColumn):
 
         self.td = [
             html.Td(
-                style = cell_style or {},
-                className = cell_class,
                 id = i_cell or str(uuid4()),
-                children = dcc.Dropdown(
-                    id = i_id,
-                    **kwargs
-                )
-            ) for i_id, i_cell, kwargs in z
+                children = self._loading_wrapper(
+                    loading = loading,
+                    dash_component = dcc.Dropdown(
+                        id = i_id,
+                        **d_kwargs
+                    ),
+                    **loading_kwargs
+                ),
+                **cell_kwargs
+            ) for i_id, i_cell, d_kwargs in z
         ]
-
-
-    def __len__(self) -> int:
-        return len(self.id)
 
 
 
@@ -246,17 +312,21 @@ class TableInputCol(TableColumn):
             self,
             id: Iterable[str],
             header: str,
-            header_style: Optional[Dict[str,str]] = None,
             cell_id: Optional[Iterable] = None,
-            cell_style: Optional[Dict[str,str]] = None,
-            cell_class: Optional[str] = None,
-            **input_kwargs
+            loading: bool = False,
+            **kwargs
         ):
+
+        input_kwargs = self._filter_kwargs(kwargs, 'input')
+        cell_kwargs = self._filter_kwargs(kwargs, 'cell')
+        header_kwargs = self._filter_kwargs(kwargs, 'header')
+        loading_kwargs = self._filter_kwargs(kwargs, 'loading')
+        print(input_kwargs)
 
         super().__init__(
             id = id,
             header = header,
-            header_style = header_style
+            **header_kwargs
         )
 
         z = zip(
@@ -267,19 +337,18 @@ class TableInputCol(TableColumn):
 
         self.td = [
             html.Td(
-                style = cell_style or {},
-                className = cell_class,
                 id = i_cell or str(uuid4()),
-                children = dbc.Input(
-                    id = i_id,
-                    **kwargs
-                )
-            ) for i_id, i_cell, kwargs in z
+                children = self._loading_wrapper(
+                    loading = loading,
+                    dash_component = dbc.Input(
+                        id = i_id,
+                        **i_kwargs
+                    ),
+                    **loading_kwargs
+                ),
+                **cell_kwargs
+            ) for i_id, i_cell, i_kwargs in z
         ]
-
-
-    def __len__(self) -> int:
-        return len(self.id)
 
 
 
@@ -304,46 +373,48 @@ class TableTextCol(TableColumn):
             self,
             id: Iterable[str],
             header: str,
-            header_style: Optional[Dict[str,str]] = None,
             text_formatting: Optional[Callable] = None,
             cell_id: Optional[Iterable] = None,
-            cell_style: Optional[Dict[str,str]] = None,
-            cell_class: Optional[str] = None,
             text: Union[Iterable, str, None] = None,
-            **span_kwargs
+            loading: bool = False,
+            **kwargs
         ):
 
         fmt = text_formatting or '{}'.format
 
+        text_kwargs = self._filter_kwargs(kwargs, 'text')
+        cell_kwargs = self._filter_kwargs(kwargs, 'cell')
+        header_kwargs = self._filter_kwargs(kwargs, 'header')
+        loading_kwargs = self._filter_kwargs(kwargs, 'loading')
+
         super().__init__(
             id = id,
             header = header,
-            header_style = header_style
+            **header_kwargs
         )
 
         z = zip(
             self.id,
             self._expand_param(cell_id),
-            self._break_kwargs(span_kwargs),
+            self._break_kwargs(text_kwargs),
             self._expand_param(text),
         )
 
         self.td = [
             html.Td(
-                style = cell_style or {},
-                className = cell_class,
                 id = i_cell or str(uuid4()),
-                children = html.Span(
-                    children = fmt(i_text),
-                    id = i_id,
-                    **kwargs
-                )
-            ) for i_id, i_cell, kwargs, i_text in z
+                children = self._loading_wrapper(
+                    loading = loading,
+                    dash_component = html.Span(
+                        children = fmt(i_text),
+                        id = i_id,
+                        **t_kwargs
+                    ),
+                    **loading_kwargs
+                ),
+                **cell_kwargs
+            ) for i_id, i_cell, t_kwargs, i_text in z
         ]
-
-
-    def __len__(self) -> int:
-        return len(self.id)
 
 
 

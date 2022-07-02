@@ -1,22 +1,28 @@
 # Dash Charlotte
 
-A package of themes, tools and components that I use on my Plotly-Dash web dashboards.
+A package of themes, tools and components for Plotly-Dash web dashboards.
 
-This is still a super early work in progress and probably not very interesting, so don't waste your time here.
+**TL;DR:** This is a personal project, so I'd suggest not taking this too seriously.
+
+## Dash Charlotte is...
+
+- ... a package to speed up the creation of dashboards with standardized components;
+- ... a bunch of components that I often use on my personal projects.
+
+## Dash Charlotte is NOT...
+
+- ... ready for production use. The structure, arguments or behavior of the components are not set in stone and change regularly depending on the ease of use observed in testing;
+- ... created in React (yet). Because of this, some components might not follow Dash rules and standards.
 
 ## Submodules
 
-- [**Components**](https://github.com/GusFurtado/dash-charlotte/tree/main/dash_charlotte/components)
+Click on the following link to check each submodule documentation.
 
-A set of standard Dash components for a fast and modular dashboard building.
+- [**Components**](https://github.com/GusFurtado/dash-charlotte/tree/main/dash_charlotte/components): A set of standard Dash components for a fast and modular dashboard building.
 
-- [**Themes**](https://github.com/GusFurtado/dash-charlotte/tree/main/dash_charlotte/themes)
+- [**Themes**](https://github.com/GusFurtado/dash-charlotte/tree/main/dash_charlotte/themes): Tools for easy and consistent styling. Colors, fonts, icon packages and CSS stuff.
 
-Tools for easy and consistent styling. Colors, fonts, icon packages and CSS stuff.
-
-- [**Layouts**](https://github.com/GusFurtado/dash-charlotte/tree/main/dash_charlotte/layouts)
-
-Some pre-built page layouts.
+- [**Layouts**](https://github.com/GusFurtado/dash-charlotte/tree/main/dash_charlotte/layouts): Some pre-built page layouts.
 
 ## Instatlation
 

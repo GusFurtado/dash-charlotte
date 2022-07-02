@@ -170,7 +170,7 @@ class TableButtonCol(TableColumn):
 
     Parameters
     ----------
-    id : Iterable[str, dict]
+    id : Iterable[str | dict]
         A series of ids for each button.
     header : str
         Name of the column.
@@ -212,7 +212,7 @@ class TableButtonCol(TableColumn):
 
     def __init__(
             self,
-            id: Iterable[str, dict],
+            id: Iterable[Union[str, dict]],
             header: str,
             text: Union[str, Iterable[str], None] = None,
             icon: Union[str, Iterable[str], None] = None,
@@ -266,7 +266,7 @@ class TableCheckBoxCol(TableColumn):
 
     Parameters
     ----------
-    id : Iterable[str, dict]
+    id : Iterable[str | dict]
         A series of ids for each button.
     header : str
         Name of the column.
@@ -292,7 +292,7 @@ class TableCheckBoxCol(TableColumn):
     -------
     >>> col = TableCheckBoxCol(
     ...     id = ['id_1', 'id_2', 'id_n'],
-    ...     header = 'Button Column,
+    ...     header = 'Checkbox Column,
     ...     header_style = {'background-color': 'cyan'},
     ...     cell_className = 'bg-shade1',
     ...     checkbox_value = [False, True, False]
@@ -348,7 +348,7 @@ class TableDropdownCol(TableColumn):
 
     Parameters
     ----------
-    id : Iterable[str, dict]
+    id : Iterable[str | dict]
         A series of ids for each button.
     header : str
         Name of the column.
@@ -374,7 +374,7 @@ class TableDropdownCol(TableColumn):
     -------
     >>> col = TableDropdownCol(
     ...     id = ['id_1', 'id_2', 'id_n'],
-    ...     header = 'Button Column,
+    ...     header = 'Dropdown Column,
     ...     header_style = {'background-color': 'cyan'},
     ...     cell_className = 'bg-shade1',
     ...     dropdown_value = [True, False, True],
@@ -435,7 +435,7 @@ class TableInputCol(TableColumn):
 
     Parameters
     ----------
-    id : Iterable[str, dict]
+    id : Iterable[str | dict]
         A series of ids for each button.
     header : str
         Name of the column.
@@ -459,9 +459,9 @@ class TableInputCol(TableColumn):
     
     Example
     -------
-    >>> col = TableDropdownCol(
+    >>> col = TableInputCol(
     ...     id = ['id_1', 'id_2', 'id_n'],
-    ...     header = 'Button Column,
+    ...     header = 'Input Column,
     ...     header_style = {'background-color': 'cyan'},
     ...     cell_className = 'bg-shade1',
     ...     input_type = 'number',
@@ -486,7 +486,6 @@ class TableInputCol(TableColumn):
         cell_kwargs = self._filter_kwargs(kwargs, 'cell')
         header_kwargs = self._filter_kwargs(kwargs, 'header')
         loading_kwargs = self._filter_kwargs(kwargs, 'loading')
-        print(input_kwargs)
 
         super().__init__(
             id = id,
@@ -522,7 +521,7 @@ class TableTextCol(TableColumn):
 
     Parameters
     ----------
-    id : Iterable[str, dict]
+    id : Iterable[str | dict]
         A series of ids for each button.
     header : str
         Name of the column.
@@ -550,9 +549,9 @@ class TableTextCol(TableColumn):
     
     Example
     -------
-    >>> col = TableDropdownCol(
+    >>> col = TableTextCol(
     ...     id = ['id_1', 'id_2', 'id_n'],
-    ...     header = 'Button Column,
+    ...     header = 'Text Column,
     ...     header_style = {'background-color': 'cyan'},
     ...     text = [1111.11, 2222.22, 3333.33],
     ...     text_format = '{:.2%}'.format,

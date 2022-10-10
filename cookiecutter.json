@@ -1,0 +1,5 @@
+{
+    "app_name": "My Web App",
+    "port": 1000,
+    "theme": ["Light", "Dark", "Dracula"]
+}

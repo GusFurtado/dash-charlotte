@@ -1,5 +1,3 @@
-from .box import Box
-from .button import Button
 from .dashboard import Dashboard
 from .footer import Footer
 from .navbar import Navbar
@@ -10,4 +8,15 @@ from .drawer import (
     DrawerMultiItem,
     DrawerSubItem,
     DrawerFooter
+)
+
+from .table import (
+    Table,
+    TableButtonCol,
+    TableCheckBoxCol,
+    TableColumn,
+    TableDropdownCol,
+    TableInputCol,
+    TableTextCol,
+    CharlotteTableError
 )

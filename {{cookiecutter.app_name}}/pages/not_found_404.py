@@ -1,4 +1,15 @@
-from dash import html
+from dash import (
+    html,
+    register_page
+)
+
+
+
+register_page(
+    __name__,
+    path = '/',
+    title = '404 - Not Found'
+)
 
 
 
@@ -50,3 +61,11 @@ class NotFound404(html.Div):
                 'min-height': '90vh'
             }
         )
+
+
+
+layout = NotFound404(
+    top_message = 'Page Not Found',
+    bottom_message = 'Use the sidebar to navigate',
+    src = '/assets/img/not_found_404.svg'
+)

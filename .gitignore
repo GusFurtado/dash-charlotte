@@ -127,12 +127,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-# Test files
-_rascunho.ipynb
-assets/
-pages/
-app.py
-
-# Manual upload to PyPI
-upload_to_pypi.bat

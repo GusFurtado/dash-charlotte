@@ -1,7 +1,7 @@
 from dash import Dash, page_container
 import dash_bootstrap_components as dbc
 
-from dash_charlotte.components import (
+from components import (
     Dashboard,
     Drawer,
     DrawerSingleItem,
@@ -15,7 +15,7 @@ from dash_charlotte.components import (
 
 app = Dash(
     name = __name__,
-    title = 'Dash Charlotte',
+    title = '{{cookiecutter.app_name}}',
     use_pages = True,
     external_stylesheets = [
         dbc.themes.BOOTSTRAP
@@ -26,13 +26,18 @@ app = Dash(
 
 nav_links = [
     DrawerSingleItem(
+        name = 'Login',
+        icon = 'bx:log-in',
+        href = '/login'
+    ),
+    DrawerSingleItem(
         name = 'Page 1',
-        icon = 'bx bx-log-in',
+        icon = 'bx:scatter-chart',
         href = '/page1'
     ),
     DrawerMultiItem(
         name = 'Page2',
-        icon = 'bx bx-line-chart',
+        icon = 'bx:line-chart',
         href = '/page2/subpage1',
         submenu = [
             DrawerSubItem(
@@ -56,12 +61,12 @@ nav_links = [
 app.layout = Dashboard(
     children = page_container,
     navbar = Navbar(
-        title = 'Navbar'
+        title = '{{cookiecutter.app_name}}'
     ),
     drawer = Drawer(
         menu = nav_links,
         logo_name = 'Charlotte',
-        logo_icon = 'fas fa-rocket'
+        logo_icon = 'heroicons:rocket-launch-20-solid'
     )
 )
 

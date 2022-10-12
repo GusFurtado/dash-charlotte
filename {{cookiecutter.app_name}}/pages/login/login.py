@@ -39,9 +39,9 @@ layout = ll.LoginPage(
     Output('login-form--subtitle', 'children'),
     Input('login-form--button', 'n_clicks'),
     Input('login-form--password', 'value'),
-    State('login-form--email', 'value'),
+    State('login-form--user', 'value'),
     prevent_initial_call = True)
-def login(submit_click, password, email):
+def login(submit_click, password, user):
 
     # INSERT HERE YOUR AUTHENTICATION FUNCTIONS
 

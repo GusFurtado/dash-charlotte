@@ -3,6 +3,7 @@ from uuid import uuid4
 
 from dash import html, dcc
 import dash_bootstrap_components as dbc
+from dash_iconify import DashIconify
 
 
 
@@ -156,9 +157,7 @@ class LoginForm(html.Div):
         return html.Div(
             className = 'input-field',
             children = [
-                html.I(
-                    className = 'fas fa-user'
-                ),
+                DashIconify(icon='fa-solid:user'),
                 dcc.Input(
                     id = f'{self.id}--user',
                     type = 'text',
@@ -172,9 +171,7 @@ class LoginForm(html.Div):
         return html.Div(
             className = 'input-field',
             children = [
-                html.I(
-                    className = 'fas fa-lock'
-                ),
+                DashIconify(icon='fa-solid:lock'),
                 dcc.Input(
                     id = f'{self.id}--password',
                     type = 'password',
@@ -249,7 +246,7 @@ class LoginPage(dbc.Container):
                         style = {'min-height': '100%'}
                     )
                 ],
-                    class_name = 'g-0 shadow'
+                    className = 'g-0 shadow'
                 )
             ],
             style = {

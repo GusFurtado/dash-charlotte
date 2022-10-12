@@ -3,6 +3,7 @@ import uuid
 
 from dash import html
 from dash.development.base_component import Component
+from dash_iconify import DashIconify
 
 
 
@@ -38,8 +39,8 @@ class Navbar(html.Nav):
         super().__init__(
             className = 'home-content shade7',
             children = [
-                html.I(
-                    className = 'fas fa-bars',
+                html.Span(
+                    DashIconify(icon='fa:bars'),
                     id = 'open-drawer'
                 ),
                 html.Span(

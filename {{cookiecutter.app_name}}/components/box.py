@@ -3,6 +3,7 @@ from uuid import uuid4
 
 from dash import html
 from dash.development.base_component import Component
+from dash_iconify import DashIconify
 
 
 
@@ -120,9 +121,10 @@ class Box(html.Div):
         )
 
         if icon is not None:
-            icon = html.I(
-                className = f'{icon} me-2',
-                id = f'{id}--icon'    
+            icon = DashIconify(
+                icon = "flat-ui:settings",
+                id = f'{id}--icon',
+                className = 'me-2'
             )
 
         header_content = html.Div(

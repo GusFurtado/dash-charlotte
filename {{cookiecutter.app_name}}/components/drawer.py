@@ -9,6 +9,7 @@ from dash import (
     State,
     MATCH
 )
+from dash_iconify import DashIconify
 
 
 
@@ -38,7 +39,10 @@ class DrawerSingleItem(html.Li):
                 html.A(
                     href = href,
                     children = [
-                        html.I(className = f'{icon} shade7'),
+                        DashIconify(
+                            icon = icon,
+                            className = 'shade7'
+                        ),
                         html.Span(
                             className = 'link-name shade7',
                             children = name
@@ -144,15 +148,21 @@ class DrawerMultiItem(html.Li):
                         html.A(
                             href = href,
                             children = [
-                                html.I(className=f'{icon} shade7'),
+                                DashIconify(
+                                    icon = icon,
+                                    className = 'shade7'
+                                ),
                                 html.Span(
                                     className = 'link-name shade7',
                                     children = name
                                 )
                             ]
                         ),
-                        html.I(
-                            className = 'bx bxs-chevron-down arrow shade7',
+                        html.Span(
+                            DashIconify(
+                                icon = 'bx:chevron-down',
+                                className = 'arrow shade7'
+                            ),
                             id = self.ids.arrow(aio_id)
                         )
                     ]
@@ -216,7 +226,10 @@ class DrawerFooter(html.Li):
                                 )
                             ]
                         ),
-                        html.I(className = f'{icon} shade7')
+                        DashIconify(
+                            icon = icon,
+                            className = 'shade7'
+                        ),
                     ]
                 )
             ]
@@ -265,7 +278,7 @@ class Drawer(html.Div):
         else:
 
             if logo_icon is not None:
-                logo_i = html.I(className=logo_icon)
+                logo_i = DashIconify(icon=logo_icon)
             elif logo_img is not None:
                 logo_i = html.Span(
                     html.Img(src=logo_img),

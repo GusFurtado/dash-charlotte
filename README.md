@@ -1,37 +1,98 @@
-# Dash Charlotte
+# Charlotte
 
-A package of themes, tools and components for Plotly-Dash web dashboards.
+## A Cookiecutter for Dashboards made in Dash
 
-**TL;DR:** This is a personal project, so I'd suggest not taking this too seriously.
+This cookiecutter contains some components that will kickstart your multipage web dashboard built in [**Dash**](https://dash.plotly.com/).
 
-## Dash Charlotte is...
+[**Dash**](https://dash.plotly.com/) is a low-code framework for rapidly building data apps in Python.
 
-- ... a package to speed up the creation of dashboards with standardized components;
-- ... a bunch of components that I often use on my personal projects.
+## Summary
 
-## Dash Charlotte is NOT...
+- [Installation](https://github.com/GusFurtado/dash-charlotte#installation)
+- [Live Demo](https://dash-charlotte.herokuapp.com/)
+- [Submodules](https://github.com/GusFurtado/dash-charlotte#submodelus)
+- [Structure](https://github.com/GusFurtado/dash-charlotte#structure)
+- [Deprecated Package](https://github.com/GusFurtado/dash-charlotte#deprecated-components-package)
+- [License](LICENSE)
 
-- ... ready for production use. The structure, arguments or behavior of the components are not set in stone and change regularly depending on the ease of use observed in testing;
-- ... created in React (yet). Because of this, some components might not follow Dash rules and standards.
+## Installation
+
+Make sure you have `cookiecutter` installed on your environment
+
+```
+pip install cookiecutter
+```
+
+After that, install **Charlotte** using the following command:
+
+```
+cookiecutter https://github.com/GusFurtado/dash-charlotte
+```
+
+Follow the installation steps and a folder should appear in the selected directory.
+
+Don't forget to install the requirements. The list of dependencies is inside the main folder.
+
+```
+pip install -r requirements.txt
+```
+
+## Live Demo
+
+- https://dash-charlotte.herokuapp.com/
 
 ## Submodules
 
-Click on the following link to check each submodule documentation.
+- [`assets`](assets): `.css` and `.svg` files;
+- [`colors`](colors): Color palettes for consistent styling;
+- [`components`](components): HTML components.
+- [`pages`](pages): Layouts and callbacks.
 
-- [**Components**](https://github.com/GusFurtado/dash-charlotte/tree/main/dash_charlotte/components): A set of standard Dash components for a fast and modular dashboard building.
+## Structure
 
-- [**Themes**](https://github.com/GusFurtado/dash-charlotte/tree/main/dash_charlotte/themes): Tools for easy and consistent styling. Colors, fonts, icon packages and CSS stuff.
+```
+{{app_name}}
+  └─ assets
+       └─ css
+            └─ theme.css
+       └─ img
+            └─ log.svg
+            └─ not_found_404.svg
+            └─ register.svg
+  └─ colors
+       └─ __init__.py
+       └─ bootstrap.py
+       └─ charlotte_dark.py
+       └─ charlotte_light.py
+       └─ colorblind.py
+       └─ colors.py
+       └─ dracula.py
+       └─ README.md
+  └─ components
+       └─ __init__.py
+       └─ box.py
+       └─ dashboard.py
+       └─ drawer.py
+       └─ footer.py
+       └─ navbar.py
+       └─ table.py
+       └─ README.md
+  └─ pages
+       └─ login
+            └─ login_layout.py
+            └─ login.py
+       └─ page1
+            └─ page1.py
+       not_found_404.py
+  └─ app.py
+```
 
-- [**Layouts**](https://github.com/GusFurtado/dash-charlotte/tree/main/dash_charlotte/layouts): Some pre-built page layouts.
+## Deprecated Components Package
 
-## Instatlation
+**Dash Charlotte** used to be a dash components package before switching to a cookiecutter app.
 
-- `pip install dash-charlotte`
+The old package can still be downloaded [here](https://github.com/GusFurtado/dash-charlotte/releases/tag/0.3.1), but it is deprecated in favor of this cookiecutter.
 
 ## License
 
-- [**MIT**]([LICENSE])
-
-## Getting Started
-
-Check the [example app](https://github.com/GusFurtado/dash-charlotte-live-demo) or the [live demo](https://dash-charlotte.herokuapp.com/).
+- [MIT](LICENSE)

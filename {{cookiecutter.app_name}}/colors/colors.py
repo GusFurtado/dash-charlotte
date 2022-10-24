@@ -2,7 +2,6 @@
 
 """
 
-
 import colorsys
 
 
@@ -59,12 +58,12 @@ class Color:
         self.b = self.blue
 
 
-    def __repr__(self) -> str:
-        return f'<ype.colors.Color: #{self.rgb}>'
-
-
     def __str__(self) -> str:
         return f'#{self.rgb}'
+
+
+    def __repr__(self) -> str:
+        return self.__str__()
 
 
     def __call__(self, light:float) -> str:
@@ -96,4 +95,4 @@ class Color:
             s = hls[2]
         )
 
-        return f'#{float2hex(rgb[0])}{float2hex(rgb[1])}{float2hex(rgb[2])}'
+        return Color(f'{float2hex(rgb[0])}{float2hex(rgb[1])}{float2hex(rgb[2])}')

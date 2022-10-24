@@ -1,7 +1,7 @@
-from dash import (
-    html,
-    register_page
-)
+from dash import register_page
+from dash_bootstrap_components import Container
+
+from components import Box
 
 
 
@@ -13,4 +13,10 @@ register_page(
 
 
 
-layout = html.H1('Page 1')
+layout = Container(
+    children = Box(
+        children = 'Conteúdo',
+        title = 'Page 1'
+    ),
+    className = 'mt-4'
+)

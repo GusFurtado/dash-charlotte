@@ -95,10 +95,10 @@
   cursor:pointer;
   transition:.3s
 }
-.sidebar .nav-links li.showMenu i.arrow{
+.sidebar .nav-links li.showMenu svg.arrow{
   transform: rotate(-180deg);
 }
-.sidebar.close .nav-links i.arrow{
+.sidebar.close .nav-links svg.arrow{
   display: none;
 }
 .sidebar .nav-links li a{

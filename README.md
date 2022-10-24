@@ -12,6 +12,7 @@ This cookiecutter contains some components that will kickstart your multipage we
 - [Live Demo](https://dash-charlotte.herokuapp.com/)
 - [Submodules](https://github.com/GusFurtado/dash-charlotte#submodelus)
 - [Structure](https://github.com/GusFurtado/dash-charlotte#structure)
+- [Deprecated Package](https://github.com/GusFurtado/dash-charlotte#deprecated-components-package)
 - [License](LICENSE)
 
 ## Installation
@@ -39,7 +40,6 @@ pip install -r requirements.txt
 ## Live Demo
 
 - https://dash-charlotte.herokuapp.com/
-
 
 ## Submodules
 
@@ -86,6 +86,12 @@ pip install -r requirements.txt
        not_found_404.py
   └─ app.py
 ```
+
+## Deprecated Components Package
+
+**Dash Charlotte** used to be a dash components package before switching to a cookiecutter app.
+
+The old package can still be downloaded [here](https://github.com/GusFurtado/dash-charlotte/releases/tag/0.3.1), but it is deprecated in favor of this cookiecutter.
 
 ## License
 

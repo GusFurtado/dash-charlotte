@@ -1,6 +1,7 @@
 {
     "app_name": "My Web App",
     "theme": ["dark", "light", "dracula"],
+    "environment": ["windows", "linux", "dev"],
     "port": 1000,
     "python_version": "3.7.10"
 }

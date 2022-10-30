@@ -1,12 +1,17 @@
+from socket import gethostname
+
 from dash import (
     register_page,
     callback,
     Output,
     Input,
-    State
+    State,
+    html,
+    no_update
 )
 
 from . import login_layout as ll
+from .login_auth import LoginAuth, LoginError
 
 
 
@@ -30,19 +35,50 @@ right_panel = ll.LoginSvgPanel(
 
 layout = ll.LoginPage(
     left_panel = left_panel,
-    right_panel = right_panel
+    right_panel = right_panel,
+    id = 'login-page'
 )
 
 
 
 @callback(
+    Output('login-page--location', 'href'),
     Output('login-form--subtitle', 'children'),
     Input('login-form--button', 'n_clicks'),
     Input('login-form--password', 'value'),
     State('login-form--user', 'value'),
+    State('login-page--location', 'search'),
     prevent_initial_call = True)
-def login(submit_click, password, user):
+def login(_, password, username, search):
 
-    # INSERT HERE YOUR AUTHENTICATION FUNCTIONS
+    # Trying to authenticate
+    try:
+        LoginAuth(username, password)
+        path = '/'.join(search.split('/')[1:])
 
-    return 'Logged in!'
+    # Error on authentication
+    except LoginError as err:
+        return (
+            no_update,
+            html.Span([
+                html.I(className = 'fas fa-times-circle me-2'),
+                html.Span(str(err))
+            ],
+                className = 'red'
+            )
+        )
+
+    # Default initial page
+    except ValueError:
+        path = 'page1'
+
+    # Successfully authenticated
+    return (
+        f'http://{gethostname()}:{{cookiecutter.port}}/{path}',
+        html.Span([
+            html.I(className = 'fas fa-check-circle me-2'),
+            html.Span('Logged in!')
+        ],
+            className = 'green'
+        )
+    )

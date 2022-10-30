@@ -107,7 +107,7 @@ class LoginForm(html.Div):
             style = {
                 'min-height': '100%',
                 'text-align': 'left',
-                'padding': 20
+                'padding': 40
             },
             className = 'bg-shade0',
             children = html.Form(

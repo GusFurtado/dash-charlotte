@@ -5,14 +5,14 @@ from components.fullscreen_message import FullscreenMessage
 
 register_page(
     __name__,
-    path = '/',
-    title = '404 - Not Found'
+    title = 'Big Data - 403',
+    path = '/forbidden'
 )
 
 
 
 layout = FullscreenMessage(
-    top_message = 'Page Not Found',
+    top_message = 'Forbidden',
     bottom_message = 'Use the sidebar to navigate',
-    src = '/assets/img/not_found_404.svg'
+    src = '/assets/images/forbidden_403.svg'
 )

@@ -2,5 +2,6 @@
     "app_name": "My Web App",
     "theme": ["dark", "light", "dracula"],
     "environment": ["windows", "linux", "dev"],
+    "add_login_page": [true, false],
     "port": 1000
 }

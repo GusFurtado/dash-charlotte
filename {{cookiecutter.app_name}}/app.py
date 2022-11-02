@@ -102,7 +102,7 @@ app.layout = Dashboard(
 
 
 
-@app.callback(
+{% if cookiecutter.add_login_page %}@app.callback(
     Output('dashboard--location', 'href'),
     Output('dashboard-navbar--title', 'children'),
     Input('dashboard--location', 'pathname'))
@@ -147,9 +147,9 @@ def init_app(path):
     # Go to login page
     elif status==401:
         return f'http://{gethostname()}:{{cookiecutter.port}}/login?page={path}', no_update
+{% endif %}{% if cookiecutter.environment == "windows" %}
 
 
-{% if cookiecutter.environment == "windows" %}
 # Run app
 if __name__ == '__main__':
     serve(
@@ -157,6 +157,8 @@ if __name__ == '__main__':
         port = {{cookiecutter.port}}
     )
 {% elif cookiecutter.environment == "dev" %}
+
+
 # Run app
 if __name__ == '__main__':
     app.run(

@@ -1,7 +1,7 @@
 {
     "app_name": "My Web App",
-    "theme": ["dark", "light", "dracula"],
-    "environment": ["windows", "linux", "dev"],
-    "add_login_page": [true, false],
+    "theme": ["light", "dark", "dracula"],
+    "environment": ["dev", "windows", "linux"],
+    "add_login_page": [false, true],
     "port": 1000
 }

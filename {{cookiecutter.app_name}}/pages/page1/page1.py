@@ -15,7 +15,7 @@ register_page(
 
 layout = Container(
     children = Box(
-        children = 'Conteúdo',
+        children = 'Content',
         title = 'Page 1'
     ),
     className = 'mt-4'

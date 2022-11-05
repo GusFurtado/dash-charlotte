@@ -38,7 +38,7 @@ app = Dash(
     server = server,
     title = '{{cookiecutter.app_name}}',
     use_pages = True,
-    update_title = 'Atualizando...',
+    update_title = 'Updating...',
 )
 
 
@@ -107,19 +107,19 @@ app.layout = Dashboard(
     Output('dashboard-navbar--title', 'children'),
     Input('dashboard--location', 'pathname'))
 def init_app(path):
-    """Redireciona para tela de login caso usuário não esteja logado.
+    """Redirects to login page if user is not logged in.
     
     Inputs
     ------
     dashboard--location.pathname
-        Página que o usuário está tentando acessar.
+        Page the user is trying to access.
 
     Outputs
     -------
     dashboard--location.href
-        Endereço da tela de login para a qual o usuário seja redirecionado.
+        URL of the login page to which the user is redirected.
     dashboard-navbar--title.children
-        Título do relatório na Navbar.
+        Updated navbar title.
 
     """
 
@@ -138,7 +138,7 @@ def init_app(path):
 
     # Change Navbar title if user had access denied
     elif path=='/forbidden':
-        return no_update, 'Usuário não autorizado'
+        return no_update, 'Unauthorized User'
 
     # Go to 403 page
     elif status==403:

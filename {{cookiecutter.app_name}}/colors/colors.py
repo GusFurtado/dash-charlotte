@@ -1,32 +1,28 @@
-"""Módulo de padronização de cores do Dash Charlotte.
-
-"""
-
 import colorsys
 
 
 
 class Color:
-    """Objeto Cor
+    """Charlotte color object.
 
     Parmeters
     ---------
     rgb : str
-        Código HEX da cor.
+        HEX code.
 
     Attributes
     ----------
     red : ype.colors.Color.ColorDecomposition
-        Componente vermelho da cor.
+        Red component.
     green : ype.colors.Color.ColorDecomposition
-        Componente verde da cor.
+        Green component.
     blue : ype.colors.Color.ColorDecomposition
-        Componente azul da cor.
+        Blue component.
     
     Methods
     -------
     __call__(light:float) -> str
-        Altera a luminosidade da cor.
+        Set a new color lightness.
 
     """
 
@@ -47,7 +43,7 @@ class Color:
         if self.rgb.startswith('#'):
             self.rgb = self.rgb[1:]
 
-        # Decompor
+        # Decompose
         self.red = self.ColorDecomposition(self.rgb[:2])
         self.green = self.ColorDecomposition(self.rgb[2:4])
         self.blue = self.ColorDecomposition(self.rgb[-2:])
@@ -66,18 +62,18 @@ class Color:
         return self.__str__()
 
 
-    def __call__(self, light:float) -> str:
-        """Altera a luminosidade da cor.
+    def __call__(self, light:float):
+        """Set a new color lightness.
 
         Parameters
         ----------
         light : float
-            Novo valor percentual de luminosidade (entre 0 e 1).
+            New lightness value (between 0 and 1).
 
         Returns
         -------
-        str
-            Nova cor no formato '#RRGGBB'.
+        Color
+            New color object.
         
         """
 

@@ -54,11 +54,14 @@ pip install -r requirements.txt
 {{app_name}}
   └─ assets
        └─ css
+            └─ bootstrap.min.css
             └─ theme.css
        └─ img
+            └─ forbidden_403.svg
             └─ log.svg
             └─ not_found_404.svg
             └─ register.svg
+            └─ settings.svg
   └─ colors
        └─ __init__.py
        └─ bootstrap.py
@@ -74,17 +77,26 @@ pip install -r requirements.txt
        └─ dashboard.py
        └─ drawer.py
        └─ footer.py
+       └─ fullscreen_message.py
        └─ navbar.py
        └─ table.py
        └─ README.md
+  └─ data
+       └─ errorlog.log
   └─ pages
        └─ login
+            └─ login_auth.py
             └─ login_layout.py
             └─ login.py
        └─ page1
             └─ page1.py
-       not_found_404.py
+       └─ forbidden_403.py
+       └─ not_found_404.py
+  └─ .gitignore
   └─ app.py
+  └─ Procfile
+  └─ requierements.txt
+  └─ runtime.txt
 ```
 
 ## Deprecated Components Package

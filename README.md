@@ -9,7 +9,7 @@ This cookiecutter contains some components that will kickstart your multipage we
 ## Summary
 
 - [Installation](https://github.com/GusFurtado/dash-charlotte#installation)
-- [Live Demo](https://dash-charlotte.herokuapp.com/)
+- [Live Demo](https://dab-apps.azurewebsites.net/ibge)
 - [Submodules](https://github.com/GusFurtado/dash-charlotte#submodelus)
 - [Structure](https://github.com/GusFurtado/dash-charlotte#structure)
 - [Deprecated Package](https://github.com/GusFurtado/dash-charlotte#deprecated-components-package)
@@ -39,7 +39,7 @@ pip install -r requirements.txt
 
 ## Live Demo
 
-- https://dash-charlotte.herokuapp.com/
+- https://dab-apps.azurewebsites.net/ibge
 
 ## Submodules
 

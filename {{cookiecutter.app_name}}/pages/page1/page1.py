@@ -1,22 +1,16 @@
-from dash import register_page
-from dash_bootstrap_components import Container
+from dash import html, register_page
 
 from components import Box
 
 
-
 register_page(
-    __name__,
-    path = '/page1',
-    title = 'Page 1'
+    module=__name__,
+    path="/page1",
+    title="Page 1",
 )
 
 
-
-layout = Container(
-    children = Box(
-        children = 'Content',
-        title = 'Page 1'
-    ),
-    className = 'mt-4'
+layout = html.Div(
+    children=Box(children="Content", title="Page 1"),
+    style={"margin-top": 20},
 )

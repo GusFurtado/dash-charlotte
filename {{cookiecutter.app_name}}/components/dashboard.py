@@ -2,11 +2,9 @@ from typing import Optional
 
 from dash import dcc, html
 from dash.development.base_component import Component
-from dash_bootstrap_components import Container
 
 
-
-class Dashboard(Container):
+class Dashboard(html.Main):
     """Container principal da aplicação.
 
     Parameters
@@ -32,27 +30,26 @@ class Dashboard(Container):
     """
 
     def __init__(
-            self,
-            children: Optional[Component] = None,
-            navbar: Optional[Component] = None,
-            drawer: Optional[Component] = None,
-            id: str = 'dashboard'
-        ):
+        self,
+        children: Optional[Component] = None,
+        navbar: Optional[Component] = None,
+        drawer: Optional[Component] = None,
+        id: str = "dashboard",
+    ):
 
         if not isinstance(children, list):
             children = [children]
 
         super().__init__(
-            id = id,
-            fluid = True,
-            className = 'dashboard-container shade7',
-            children = [
-                dcc.Location(id=f'{id}--location'),
-                dcc.Store(id=f'{id}--data'),
+            id=id,
+            className="dashboard-container shade7",
+            children=[
+                dcc.Location(id=f"{id}--location"),
+                dcc.Store(id=f"{id}--data"),
                 drawer,
                 html.Section(
-                    className = 'home-section',
-                    children = [navbar] + children
-                )
-            ]
+                    children=[navbar, *children],
+                    className="home-section",
+                ),
+            ],
         )

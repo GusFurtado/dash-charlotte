@@ -11,8 +11,8 @@ from dash import (
     page_container
 )
 from flask import Flask
-{% if cookiecutter.environment == "windows" %}from waitress import serve
-{% endif %}
+{% if cookiecutter.environment == "windows" %}from waitress import serve{% endif %}
+
 # Charlotte components
 from components import (
     Dashboard,
@@ -23,7 +23,7 @@ from components import (
     DrawerFooter,
     Navbar
 )
-from pages.login.login_auth import LoginAuth
+{% if cookiecutter.add_login_page %}from pages.login.login_auth import LoginAuth{% endif %}
 
 
 # Create server with secret key

@@ -57,8 +57,8 @@ colorful_spans = [
 
 ## Color themes
 
-- [**Bootstrap**](https://github.com/GusFurtado/dash-charlotte/blob/main/dash_charlotte/themes/bootstrap.py)
-- [**Charlotte Dark**](https://github.com/GusFurtado/dash-charlotte/blob/main/dash_charlotte/themes/charlotte_dark.py)
-- [**Charlotte Light**](https://github.com/GusFurtado/dash-charlotte/blob/main/dash_charlotte/themes/charlotte_light.py)
-- [**Colorblind**](https://github.com/GusFurtado/dash-charlotte/blob/main/dash_charlotte/themes/colorblind.py)
-- [**Dracula**](https://github.com/GusFurtado/dash-charlotte/blob/main/dash_charlotte/themes/dracula.py)
+- [**Bootstrap**](bootstrap.py)
+- [**Charlotte Dark**](charlotte_dark.py)
+- [**Charlotte Light**](charlotte_light.py)
+- [**Colorblind**](colorblind.py)
+- [**Dracula**](dracula.py)

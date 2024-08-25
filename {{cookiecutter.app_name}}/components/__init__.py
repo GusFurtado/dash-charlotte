@@ -8,16 +8,5 @@ from .drawer import (
     DrawerSingleItem,
     DrawerMultiItem,
     DrawerSubItem,
-    DrawerFooter
-)
-
-from .table import (
-    Table,
-    TableButtonCol,
-    TableCheckBoxCol,
-    TableColumn,
-    TableDropdownCol,
-    TableInputCol,
-    TableTextCol,
-    CharlotteTableError
+    DrawerFooter,
 )

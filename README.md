@@ -10,7 +10,7 @@ This cookiecutter contains some components that will kickstart your multipage we
 
 - [Installation](https://github.com/GusFurtado/dash-charlotte#installation)
 - Live Demo (Temporarily deactivated)
-- [Submodules](https://github.com/GusFurtado/dash-charlotte#submodelus)
+- [Submodules](https://github.com/GusFurtado/dash-charlotte#submodules)
 - [Structure](https://github.com/GusFurtado/dash-charlotte#structure)
 - [Deprecated Package](https://github.com/GusFurtado/dash-charlotte#deprecated-components-package)
 - [License](LICENSE)

@@ -1,5 +1,5 @@
 dash
 dash-iconify
 {% if cookiecutter.environment == "windows" %}waitress
-{% elif cookiecutter.environment == "linux" %}gunicorn>=20.0.4
+{% elif cookiecutter.environment == "linux" %}gunicorn
 {% endif %}

@@ -9,7 +9,7 @@ This cookiecutter contains some components that will kickstart your multipage we
 ## Summary
 
 - [Installation](https://github.com/GusFurtado/dash-charlotte#installation)
-- [Live Demo](https://dab-apps.azurewebsites.net/ibge)
+- Live Demo (Temporarily deactivated)
 - [Submodules](https://github.com/GusFurtado/dash-charlotte#submodelus)
 - [Structure](https://github.com/GusFurtado/dash-charlotte#structure)
 - [Deprecated Package](https://github.com/GusFurtado/dash-charlotte#deprecated-components-package)
@@ -39,14 +39,14 @@ pip install -r requirements.txt
 
 ## Live Demo
 
-- https://dab-apps.azurewebsites.net/ibge
+- (Temporarily deactivated)
 
 ## Submodules
 
-- [`assets`](assets): `.css` and `.svg` files;
-- [`colors`](colors): Color palettes for consistent styling;
-- [`components`](components): HTML components.
-- [`pages`](pages): Layouts and callbacks.
+- [`assets`]({{cookiecutter.app_name}}/assets): `.css` and `.svg` files;
+- [`colors`]({{cookiecutter.app_name}}/colors): Color palettes for consistent styling;
+- [`components`]({{cookiecutter.app_name}}/components): HTML components.
+- [`pages`]({{cookiecutter.app_name}}/pages): Layouts and callbacks.
 
 ## Structure
 
@@ -54,7 +54,6 @@ pip install -r requirements.txt
 {{app_name}}
   └─ assets
        └─ css
-            └─ bootstrap.min.css
             └─ theme.css
        └─ img
             └─ forbidden_403.svg
@@ -79,7 +78,6 @@ pip install -r requirements.txt
        └─ footer.py
        └─ fullscreen_message.py
        └─ navbar.py
-       └─ table.py
        └─ README.md
   └─ data
        └─ errorlog.log

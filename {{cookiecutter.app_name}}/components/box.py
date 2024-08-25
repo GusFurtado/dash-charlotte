@@ -6,7 +6,6 @@ from dash.development.base_component import Component
 from dash_iconify import DashIconify
 
 
-
 class Box(html.Div):
     """Default box.
 
@@ -48,126 +47,98 @@ class Box(html.Div):
     """
 
     def __init__(
-            self,
-            children: Optional[Component] = None,
-            title: Optional[Component] = None,
-            subtitle: Optional[Component] = None,
-            title_color: str = 'blue',
-            title_style: Optional[dict] = None,
-            icon: Optional[str] = None,
-            header_content: Optional[Component] = None,
-            style: Optional[dict] = None,
-            padding: float = 10,
-            id: Optional[str] = None
-        ):
+        self,
+        children: Optional[Component] = None,
+        title: Optional[Component] = None,
+        subtitle: Optional[Component] = None,
+        title_color: str = "blue",
+        title_style: Optional[dict] = None,
+        icon: Optional[str] = None,
+        header_content: Optional[Component] = None,
+        style: Optional[dict] = None,
+        padding: float = 10,
+        id: Optional[str] = None,
+    ):
 
         id = id or str(uuid4())
 
-        box_style = {
-            'border-radius': 10,
-            'margin': 10
-        }
-
+        box_style = {"border-radius": 10, "margin": 10}
         if isinstance(style, dict):
             box_style.update(style)
 
         super().__init__(
-            style = box_style,
-            className = 'bg-shade0 shadow',
-            children = [
+            style=box_style,
+            className="bg-shade0 shadow",
+            children=[
                 self.header(
-                    title = title,
-                    subtitle = subtitle,
-                    title_color = title_color,
-                    title_style = title_style,
-                    icon = icon,
-                    header_content = header_content,
-                    padding = padding,
-                    id = id
+                    title=title,
+                    subtitle=subtitle,
+                    title_color=title_color,
+                    title_style=title_style,
+                    icon=icon,
+                    header_content=header_content,
+                    padding=padding,
+                    id=id,
                 ),
-                self.content(
-                    content = children,
-                    padding = padding,
-                    id = id
-                )
-            ]
+                self.content(content=children, padding=padding, id=id),
+            ],
         )
-
 
     def header(
-            self,
-            title,
-            subtitle,
-            title_color,
-            title_style,
-            icon,
-            header_content,
-            padding,
-            id
-        ) -> html.Div:
+        self,
+        title,
+        subtitle,
+        title_color,
+        title_style,
+        icon,
+        header_content,
+        padding,
+        id,
+    ) -> html.Div:
 
-        title = html.Span(
-            title,
-            id = f'{id}--title'
-        )
-
+        title = html.Span(title, id=f"{id}--title")
         subtitle = html.Span(
-            children = subtitle,
-            id = f'{id}--subtitle',
-            className = 'shade4',
-            style = {
-                'font-size': 16
-            }
+            children=subtitle,
+            id=f"{id}--subtitle",
+            className="shade4",
+            style={"font-size": 16},
         )
 
         if icon is not None:
             icon = DashIconify(
-                icon = "flat-ui:settings",
-                id = f'{id}--icon',
-                className = 'me-2'
+                icon="flat-ui:settings", id=f"{id}--icon", className="me-2"
             )
 
-        header_content = html.Div(
-            children = header_content,
-            id = f'{id}--header-content'
-        )
+        header_content = html.Div(children=header_content, id=f"{id}--header-content")
 
-        style = {
-            'font-size': 22,
-            'font-weight': 'bold'
-        }
+        style = {"font-size": 22, "font-weight": "bold"}
         if title_style is not None:
             style.update(title_style)
 
-        title_stuff = html.Div([
-            html.Div(
-                children = [icon, title],
-                className = title_color,
-                style = style,
-                id = f'{id}--title-style'
-            ),
-            subtitle
-        ])
-
-        return html.Div(
-            children = [
-                title_stuff,
-                header_content
-            ],
-            style = {
-                'display': 'flex',
-                'justify-content': 'space-between',
-                'padding': f'{padding}px {2*padding}px'
-            }
+        title_stuff = html.Div(
+            [
+                html.Div(
+                    children=[icon, title],
+                    className=title_color,
+                    style=style,
+                    id=f"{id}--title-style",
+                ),
+                subtitle,
+            ]
         )
 
+        return html.Div(
+            children=[title_stuff, header_content],
+            style={
+                "display": "flex",
+                "justify-content": "space-between",
+                "padding": f"{padding}px {2*padding}px",
+            },
+        )
 
     def content(self, content, padding, id) -> html.Div:
         return html.Div(
-            children = content,
-            id = id,
-            style = {
-                'padding': 2 * padding,
-                'padding-top': padding
-            }
+            children=content,
+            id=id,
+            style={"padding": 2 * padding, "padding-top": padding},
         )

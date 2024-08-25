@@ -5,7 +5,6 @@ from dash import html
 from dash.development.base_component import Component
 
 
-
 class Footer(html.Footer):
     """Default footer.
 
@@ -30,35 +29,35 @@ class Footer(html.Footer):
     """
 
     def __init__(
-            self,
-            left_text: Optional[Component] = None,
-            right_text: Optional[Component] = None,
-            id: Optional[str] = None
-        ):
+        self,
+        left_text: Optional[Component] = None,
+        right_text: Optional[Component] = None,
+        id: Optional[str] = None,
+    ):
 
         id = id or str(uuid4())
-
         super().__init__(
-            id = id,
-            children = html.Div([
-                html.Span(
-                    children = left_text,
-                    id = f'{id}--left',
-                    style = {'font-size': 14},
-                    className = 'shade6'
-                ),
-                html.Span(
-                    children = right_text,
-                    id = f'{id}--right',
-                    style = {'font-size': 14},
-                    className = 'shade6'
-                )
-            ],
-                style = {
-                    'display': 'flex',
-                    'justify-content': 'space-between',
-                    'margin-top': '1.5rem',
-                    'padding': '1.2rem'
-                }
-            )
+            id=id,
+            children=html.Div(
+                [
+                    html.Span(
+                        children=left_text,
+                        id=f"{id}--left",
+                        style={"font-size": 14},
+                        className="shade6",
+                    ),
+                    html.Span(
+                        children=right_text,
+                        id=f"{id}--right",
+                        style={"font-size": 14},
+                        className="shade6",
+                    ),
+                ],
+                style={
+                    "display": "flex",
+                    "justify-content": "space-between",
+                    "margin-top": "1.5rem",
+                    "padding": "1.2rem",
+                },
+            ),
         )

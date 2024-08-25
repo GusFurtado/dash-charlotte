@@ -190,7 +190,6 @@ class LoginPage(html.Div):
 
         id = id or str(uuid4())
 
-        # Ensure that the widths sum to 1 (100%)
         total_width = left_panel_width + right_panel_width
         left_panel_width /= total_width
         right_panel_width /= total_width

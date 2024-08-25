@@ -1,10 +1,5 @@
-dash>=2.5.1
-dash-bootstrap-components>=1.0.2
+dash
 dash-iconify
-pandas
-plotly>=5.4.0
-numpy
-Werkzeug==2.0.0
 {% if cookiecutter.environment == "windows" %}waitress
 {% elif cookiecutter.environment == "linux" %}gunicorn>=20.0.4
 {% endif %}

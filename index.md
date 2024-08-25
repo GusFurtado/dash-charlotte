@@ -1,19 +1,6 @@
-# Charlotte
-
-## A Cookiecutter for Dashboards made in Dash
-
 This cookiecutter contains some components that will kickstart your multipage web dashboard built in [**Dash**](https://dash.plotly.com/).
 
 [**Dash**](https://dash.plotly.com/) is a low-code framework for rapidly building data apps in Python.
-
-## Summary
-
-- [Installation](https://github.com/GusFurtado/dash-charlotte#installation)
-- Live Demo (Temporarily deactivated)
-- [Submodules](https://github.com/GusFurtado/dash-charlotte#submodules)
-- [Structure](https://github.com/GusFurtado/dash-charlotte#structure)
-- [Deprecated Package](https://github.com/GusFurtado/dash-charlotte#deprecated-components-package)
-- [License](LICENSE)
 
 ## Installation
 
@@ -43,10 +30,10 @@ pip install -r requirements.txt
 
 ## Submodules
 
-- [`assets`]({{cookiecutter.app_name}}/assets): `.css` and `.svg` files;
-- [`colors`]({{cookiecutter.app_name}}/colors): Color palettes for consistent styling;
-- [`components`]({{cookiecutter.app_name}}/components): HTML components.
-- [`pages`]({{cookiecutter.app_name}}/pages): Layouts and callbacks.
+- [`assets`](https://github.com/GusFurtado/dash-charlotte/tree/main/%7B%7Bcookiecutter.app_name%7D%7D/assets): `.css` and `.svg` files;
+- [`colors`](https://github.com/GusFurtado/dash-charlotte/tree/main/%7B%7Bcookiecutter.app_name%7D%7D/colors): Color palettes for consistent styling;
+- [`components`](https://github.com/GusFurtado/dash-charlotte/tree/main/%7B%7Bcookiecutter.app_name%7D%7D/components): HTML components.
+- [`pages`](https://github.com/GusFurtado/dash-charlotte/tree/main/%7B%7Bcookiecutter.app_name%7D%7D/pages): Layouts and callbacks.
 
 ## Structure
 
@@ -105,4 +92,4 @@ The old package can still be downloaded [here](https://github.com/GusFurtado/das
 
 ## License
 
-- [MIT](LICENSE)
+- [MIT](https://github.com/GusFurtado/dash-charlotte/blob/main/LICENSE)
